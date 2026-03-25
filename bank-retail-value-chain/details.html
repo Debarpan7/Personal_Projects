@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Value Chain Activity Flow</title>
+    <title>Value Chain Activity Detail</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="page-header">
-      <h1 id="detailTitle">Activity Flow</h1>
+      <h1 id="detailTitle">Activity Detail</h1>
       <p>
-        L2 drill-down: linear activity flow with multi-unit mapping, owner, and system
-        context for each activity node.
+        Activity boxes are side-by-side. In edit mode, drag cards to reorder and edit
+        unit/person/system/info mappings.
       </p>
       <a href="index.html" class="back-link">← Back to Matrix</a>
     </header>
 
     <section id="activeFilterInfo" class="selection-info"></section>
-
+    <section id="activityToolbar" class="controls"></section>
     <main id="flowCanvas" class="flow-canvas"></main>
 
     <script src="data.js"></script>

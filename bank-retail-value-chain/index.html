@@ -8,18 +8,24 @@
   </head>
   <body>
     <header class="page-header">
-      <h1>Retail Banking L1 × L2 Value Chain Matrix</h1>
+      <h1>Retail Banking L1 × L2 Matrix</h1>
       <p>
-        Columns are value-chain L1 stages. Each cell now contains multiple L2 blocks,
-        each with activity count and unit-summary dots. Single-click any L2 block for
-        activity-level drill-down.
+        Optimized matrix with configurable model. Edit mode lets you change products,
+        stages, L2s, units and activities (via JSON editor + detail editor).
       </p>
     </header>
 
     <section class="controls">
-      <div class="control-title">Filter / Highlight by Unit or Channel</div>
+      <div class="control-row">
+        <button id="editToggle" class="clear-btn">Enter Edit Mode</button>
+        <button id="saveConfigBtn" class="clear-btn">Save JSON</button>
+        <button id="resetConfigBtn" class="clear-btn">Reset</button>
+        <button id="downloadConfigBtn" class="clear-btn">Download JSON</button>
+      </div>
+      <div id="statusLine" class="selection-info"></div>
+      <div class="control-title">Filter by Unit</div>
       <div id="unitFilters" class="chip-wrap"></div>
-      <button id="clearFilter" class="clear-btn">Clear</button>
+      <button id="clearFilter" class="clear-btn">Clear Filter</button>
     </section>
 
     <main>
@@ -27,6 +33,11 @@
         <table id="matrix"></table>
       </div>
       <div id="selectionInfo" class="selection-info"></div>
+
+      <section class="controls">
+        <div class="control-title">Full Configuration JSON (Add / Edit / Remove Everything)</div>
+        <textarea id="configEditor" class="config-editor"></textarea>
+      </section>
     </main>
 
     <script src="data.js"></script>

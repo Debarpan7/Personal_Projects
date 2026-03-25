@@ -99,6 +99,8 @@ select {
   padding: 0.3rem;
   background: #fff;
 }
+.layer-btn.active { background: var(--accent3); color: #13111b; border-color: var(--accent3); }
+.layer-details { margin-top: 0.7rem; color: var(--muted); }
 
 .stack-wrap { display: grid; grid-template-columns: 320px 1fr; gap: 0.8rem; }
 .stack { border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 0.8rem; }

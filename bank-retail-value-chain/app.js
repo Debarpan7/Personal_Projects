@@ -9,11 +9,16 @@ const resetConfigBtn = document.getElementById("resetConfigBtn");
 const downloadConfigBtn = document.getElementById("downloadConfigBtn");
 const statusLine = document.getElementById("statusLine");
 
+<<<<<<< HEAD
+const pageQuery = new URLSearchParams(window.location.search);
+let selectedUnit = pageQuery.get("unit") || localStorage.getItem("retail_selected_unit") || null;
+=======
 <<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
 const pageQuery = new URLSearchParams(window.location.search);
 let selectedUnit = pageQuery.get("unit") || localStorage.getItem("retail_selected_unit") || null;
 =======
 let selectedUnit = null;
+>>>>>>> main
 >>>>>>> main
 let editMode = false;
 let config = null;
@@ -32,10 +37,15 @@ function renderUnitFilters() {
     chip.dataset.unit = unit.id;
     chip.onclick = () => {
       selectedUnit = selectedUnit === unit.id ? null : unit.id;
+<<<<<<< HEAD
+      if (selectedUnit) localStorage.setItem("retail_selected_unit", selectedUnit);
+      else localStorage.removeItem("retail_selected_unit");
+=======
 <<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
       if (selectedUnit) localStorage.setItem("retail_selected_unit", selectedUnit);
       else localStorage.removeItem("retail_selected_unit");
 =======
+>>>>>>> main
 >>>>>>> main
       render();
     };
@@ -179,9 +189,13 @@ downloadConfigBtn.onclick = () => {
 
 clearFilterBtn.onclick = () => {
   selectedUnit = null;
+<<<<<<< HEAD
+  localStorage.removeItem("retail_selected_unit");
+=======
 <<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
   localStorage.removeItem("retail_selected_unit");
 =======
+>>>>>>> main
 >>>>>>> main
   render();
 };

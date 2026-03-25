@@ -1,5 +1,9 @@
 const STORAGE_KEY = "retail_value_chain_config_v2";
+<<<<<<< HEAD
+const SOURCE_CHECK_KEY = "retail_value_chain_source_checked_v1"; // session-scoped fetch guard
+=======
 const SOURCE_CHECK_KEY = "retail_value_chain_source_checked_v1";
+>>>>>>> main
 
 const DEFAULT_CONFIG = {
   units: [
@@ -149,6 +153,10 @@ function saveConfig(cfg) {
 
 function resetConfig() {
   localStorage.removeItem(STORAGE_KEY);
+<<<<<<< HEAD
+  sessionStorage.removeItem(SOURCE_CHECK_KEY);
+=======
+>>>>>>> main
   return ensureShape(structuredClone(DEFAULT_CONFIG));
 }
 
@@ -167,7 +175,11 @@ function uniqueUnitsForL2(l2) {
 
 
 async function loadPreferredConfig(fileName = "value_chain.json") {
+<<<<<<< HEAD
+  const alreadyChecked = sessionStorage.getItem(SOURCE_CHECK_KEY) === "1";
+=======
   const alreadyChecked = localStorage.getItem(SOURCE_CHECK_KEY) === "1";
+>>>>>>> main
   if (alreadyChecked) return loadConfig();
 
   try {
@@ -178,10 +190,17 @@ async function loadPreferredConfig(fileName = "value_chain.json") {
     if (!check.ok) throw new Error(check.error);
 
     saveConfig(parsed);
+<<<<<<< HEAD
+    sessionStorage.setItem(SOURCE_CHECK_KEY, "1");
+    return ensureShape(parsed);
+  } catch {
+    sessionStorage.setItem(SOURCE_CHECK_KEY, "1");
+=======
     localStorage.setItem(SOURCE_CHECK_KEY, "1");
     return ensureShape(parsed);
   } catch {
     localStorage.setItem(SOURCE_CHECK_KEY, "1");
+>>>>>>> main
     return loadConfig();
   }
 }

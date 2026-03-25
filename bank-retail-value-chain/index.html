@@ -3,40 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Retail Banking Value Chain Mapper</title>
+    <title>SBI AI Strategy Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="page-header">
-      <h1>Retail Banking L1 × L2 Matrix</h1>
-      <p>
-        Optimized matrix with configurable model. Edit mode lets you change products,
-        stages, L2s, units and activities (via JSON editor + detail editor).
-      </p>
+    <header class="topbar">
+      <div class="brand">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 5v14M5 12h14"/></svg>
+        <span>SBI AI STRATEGY ATLAS</span>
+      </div>
+      <nav>
+        <a href="index.html" class="active">Overview</a>
+        <a href="layers.html">Bank Stack</a>
+        <a href="dashboard.html">Data Dashboard</a>
+      </nav>
     </header>
 
-    <section class="controls">
-      <div class="control-row">
-        <button id="editToggle" class="clear-btn">Enter Edit Mode</button>
-        <button id="saveConfigBtn" class="clear-btn">Save JSON</button>
-        <button id="resetConfigBtn" class="clear-btn">Reset</button>
-        <button id="downloadConfigBtn" class="clear-btn">Download JSON</button>
-      </div>
-      <div id="statusLine" class="selection-info"></div>
-      <div class="control-title">Filter by Unit</div>
-      <div id="unitFilters" class="chip-wrap"></div>
-      <button id="clearFilter" class="clear-btn">Clear Filter</button>
-    </section>
+    <main class="container">
+      <section class="hero">
+        <p class="kicker">Palantir-inspired operating brief · minimal pastel UI</p>
+        <h1>Where SBI margin pressure starts—and where GenAI fixes it.</h1>
+        <p class="muted">Use the reveal buttons below to move from macro shocks to execution themes.</p>
+      </section>
 
-    <main>
-      <div class="table-wrap">
-        <table id="matrix"></table>
-      </div>
-      <div id="selectionInfo" class="selection-info"></div>
+      <section class="button-row">
+        <button class="reveal-btn" data-target="macro">Reveal macro pressure map</button>
+        <button class="reveal-btn" data-target="kpi">Reveal KPI stress map</button>
+        <button class="reveal-btn" data-target="themes">Reveal AI action themes</button>
+      </section>
 
-      <section class="controls">
-        <div class="control-title">Full Configuration JSON (Add / Edit / Remove Everything)</div>
-        <textarea id="configEditor" class="config-editor"></textarea>
+      <section id="macro" class="panel hidden">
+        <h2>Macro factors → impact on Indian banks</h2>
+        <div class="card-grid" id="macroCards"></div>
+      </section>
+
+      <section id="kpi" class="panel hidden">
+        <h2>Stakeholders, KPIs, and driver pressure</h2>
+        <div class="split">
+          <aside id="stakeholderTabs" class="tabs"></aside>
+          <article id="stakeholderView" class="panel-soft"></article>
+        </div>
+      </section>
+
+      <section id="themes" class="panel hidden">
+        <h2>4 AI themes (low-hanging → scaled)</h2>
+        <div class="inline-control">
+          <label for="mode">Execution mode</label>
+          <select id="mode">
+            <option value="pilot">Pilot</option>
+            <option value="accelerate">Accelerate</option>
+            <option value="scale">Scale</option>
+          </select>
+        </div>
+        <div id="themeGrid" class="card-grid"></div>
       </section>
     </main>
 

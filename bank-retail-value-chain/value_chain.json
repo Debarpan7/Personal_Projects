@@ -1,0 +1,62 @@
+{
+  "units": [
+    { "id": "branch", "label": "Branch" },
+    { "id": "digital", "label": "Digital" },
+    { "id": "cpc", "label": "Central Processing Center" },
+    { "id": "rbo", "label": "Regional Business Office" },
+    { "id": "contact", "label": "Contact Center" },
+    { "id": "kyc", "label": "KYC / AML Ops" }
+  ],
+  "stages": [
+    { "id": "lead", "label": "Lead Generation" },
+    { "id": "origination", "label": "Origination" },
+    { "id": "assessment", "label": "Assessment" },
+    { "id": "fulfillment", "label": "Fulfillment" },
+    { "id": "service", "label": "Servicing" },
+    { "id": "risk", "label": "Risk / Compliance" },
+    { "id": "renewal", "label": "Renewal / Exit" }
+  ],
+  "lobs": [
+    {
+      "id": "home-loans",
+      "name": "Home Loans",
+      "stages": {
+        "lead": [
+          {
+            "id": "hl-lead-1",
+            "name": "Campaign Sourcing",
+            "activities": [
+              {
+                "id": "a1",
+                "name": "Builder campaign lead capture",
+                "assignments": [
+                  { "unitId": "branch", "person": "Sales Officer", "system": "CRM", "info": "Capture and qualify builder-sourced leads" },
+                  { "unitId": "digital", "person": "", "system": "Landing Funnel", "info": "Collect self-service leads" }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [],
+        "assessment": [],
+        "fulfillment": [],
+        "service": [],
+        "risk": [],
+        "renewal": []
+      }
+    },
+    {
+      "id": "personal-loans",
+      "name": "Personal Loans",
+      "stages": {
+        "lead": [],
+        "origination": [],
+        "assessment": [],
+        "fulfillment": [],
+        "service": [],
+        "risk": [],
+        "renewal": []
+      }
+    }
+  ]
+}

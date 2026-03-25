@@ -3,42 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Retail Banking Value Chain Mapper</title>
+    <title>SBI GenAI Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Fraunces:opsz,wght,SOFT@9..144,300..700,80&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="page-header">
-      <h1>Retail Banking L1 × L2 Matrix</h1>
-      <p>
-        Optimized matrix with configurable model. Edit mode lets you change products,
-        stages, L2s, units and activities (via JSON editor + detail editor).
+    <div class="noise"></div>
+    <header class="hero reveal">
+      <p class="eyebrow">State Bank of India · Strategic Storyline</p>
+      <h1>GenAI Margin Recovery <span>War-Room</span></h1>
+      <p class="subtitle">
+        A top-down, interactive blueprint from macro stress to execution layers, KPI pressure,
+        and agentic action themes.
       </p>
+      <div class="hero-stats" id="macroTicker"></div>
     </header>
 
-    <section class="controls">
-      <div class="control-row">
-        <button id="editToggle" class="clear-btn">Enter Edit Mode</button>
-        <button id="saveConfigBtn" class="clear-btn">Save JSON</button>
-        <button id="resetConfigBtn" class="clear-btn">Reset</button>
-        <button id="downloadConfigBtn" class="clear-btn">Download JSON</button>
-      </div>
-      <div id="statusLine" class="selection-info"></div>
-      <div class="control-title">Filter by Unit</div>
-      <div id="unitFilters" class="chip-wrap"></div>
-      <button id="clearFilter" class="clear-btn">Clear Filter</button>
-    </section>
-
     <main>
-      <div class="table-wrap">
-        <table id="matrix"></table>
-      </div>
-      <div id="selectionInfo" class="selection-info"></div>
+      <section class="panel reveal" id="macro">
+        <div class="panel-head">
+          <h2>1) Macro Forces → Banking Margin Pressure</h2>
+          <p>Click a macro factor to trace impact pathways into SBI's P&L and operations.</p>
+        </div>
+        <div class="macro-grid" id="macroGrid"></div>
+        <div class="impact-trace" id="impactTrace"></div>
+      </section>
 
-      <section class="controls">
-        <div class="control-title">Full Configuration JSON (Add / Edit / Remove Everything)</div>
-        <textarea id="configEditor" class="config-editor"></textarea>
+      <section class="panel reveal" id="layers">
+        <div class="panel-head">
+          <h2>2) Banking Ecosystem Stack</h2>
+          <p>Toggle layers to reveal where GenAI unlocks speed, quality, and productivity.</p>
+        </div>
+        <div class="layer-strip" id="layerStrip"></div>
+        <div class="layer-details" id="layerDetails"></div>
+      </section>
+
+      <section class="panel reveal" id="stakeholders">
+        <div class="panel-head">
+          <h2>3) Org Structure, KPI Drivers, and AI Levers</h2>
+          <p>Select stakeholders to inspect KPIs, pressure points, and AI interventions.</p>
+        </div>
+        <div class="stakeholder-shell">
+          <aside id="stakeholderList" class="stakeholder-list"></aside>
+          <article id="stakeholderDetail" class="stakeholder-detail"></article>
+        </div>
+      </section>
+
+      <section class="panel reveal" id="themes">
+        <div class="panel-head">
+          <h2>4) Four Major AI Themes (Low-Hanging to Transformative)</h2>
+          <p>Expand each theme and use the maturity slider to switch from pilot to scale mode.</p>
+        </div>
+        <div class="slider-wrap">
+          <label for="maturity">Implementation Maturity: <strong id="maturityLabel">Pilot</strong></label>
+          <input type="range" id="maturity" min="0" max="2" value="0" />
+        </div>
+        <div id="themeCards" class="theme-cards"></div>
       </section>
     </main>
+
+    <footer class="reveal">
+      <p>Remember this: <strong>Every 10 bps of margin protected is strategy made visible.</strong></p>
+    </footer>
 
     <script src="data.js"></script>
     <script src="app.js"></script>

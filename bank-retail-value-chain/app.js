@@ -1,203 +1,123 @@
-const matrix = document.getElementById("matrix");
-const unitFilters = document.getElementById("unitFilters");
-const selectionInfo = document.getElementById("selectionInfo");
-const clearFilterBtn = document.getElementById("clearFilter");
-const configEditor = document.getElementById("configEditor");
-const editToggle = document.getElementById("editToggle");
-const saveConfigBtn = document.getElementById("saveConfigBtn");
-const resetConfigBtn = document.getElementById("resetConfigBtn");
-const downloadConfigBtn = document.getElementById("downloadConfigBtn");
-const statusLine = document.getElementById("statusLine");
+const data = window.storyData;
 
-<<<<<<< HEAD
-const pageQuery = new URLSearchParams(window.location.search);
-let selectedUnit = pageQuery.get("unit") || localStorage.getItem("retail_selected_unit") || null;
-=======
-<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
-const pageQuery = new URLSearchParams(window.location.search);
-let selectedUnit = pageQuery.get("unit") || localStorage.getItem("retail_selected_unit") || null;
-=======
-let selectedUnit = null;
->>>>>>> main
->>>>>>> main
-let editMode = false;
-let config = null;
+const macroTicker = document.getElementById("macroTicker");
+const macroGrid = document.getElementById("macroGrid");
+const impactTrace = document.getElementById("impactTrace");
+const layerStrip = document.getElementById("layerStrip");
+const layerDetails = document.getElementById("layerDetails");
+const stakeholderList = document.getElementById("stakeholderList");
+const stakeholderDetail = document.getElementById("stakeholderDetail");
+const themeCards = document.getElementById("themeCards");
+const maturity = document.getElementById("maturity");
+const maturityLabel = document.getElementById("maturityLabel");
 
-function unitLabel(id) {
-  return config.units.find((u) => u.id === id)?.label || id;
+let activeMacro = 0;
+let activeLayer = 0;
+let activeStakeholder = 0;
+
+const maturityMap = ["pilot", "accelerate", "scale"];
+const maturityNames = ["Pilot", "Accelerate", "Scale"];
+
+function renderTicker() {
+  macroTicker.innerHTML = data.macroTicker
+    .map((item) => `<div class="stat"><span>${item.label}</span><b>${item.value}</b></div>`)
+    .join("");
 }
 
-function renderUnitFilters() {
-  unitFilters.innerHTML = "";
-  const fragment = document.createDocumentFragment();
-  config.units.forEach((unit) => {
-    const chip = document.createElement("button");
-    chip.className = "chip";
-    chip.textContent = unit.label;
-    chip.dataset.unit = unit.id;
-    chip.onclick = () => {
-      selectedUnit = selectedUnit === unit.id ? null : unit.id;
-<<<<<<< HEAD
-      if (selectedUnit) localStorage.setItem("retail_selected_unit", selectedUnit);
-      else localStorage.removeItem("retail_selected_unit");
-=======
-<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
-      if (selectedUnit) localStorage.setItem("retail_selected_unit", selectedUnit);
-      else localStorage.removeItem("retail_selected_unit");
-=======
->>>>>>> main
->>>>>>> main
-      render();
-    };
-    fragment.appendChild(chip);
-  });
-  unitFilters.appendChild(fragment);
-}
+function renderMacro() {
+  macroGrid.innerHTML = data.macroFactors
+    .map(
+      (factor, idx) => `
+      <article class="macro-card ${idx === activeMacro ? "active" : ""}" data-macro="${idx}">
+        <h3>${factor.name}</h3>
+        <p><strong>Signal:</strong> ${factor.signal}</p>
+      </article>`
+    )
+    .join("");
 
-function renderMatrix() {
-  matrix.innerHTML = "";
-  const head = document.createElement("tr");
-  head.innerHTML = `<th class="row-head">Product / LOB / Service</th>${config.stages.map((s) => `<th>${s.label}</th>`).join("")}`;
-  matrix.appendChild(head);
+  const item = data.macroFactors[activeMacro];
+  impactTrace.innerHTML = `
+    <h3>Impact pathway</h3>
+    <p><strong>Primary effects:</strong> ${item.effects.join(" → ")}</p>
+    <p><strong>Where SBI struggles:</strong> ${item.sbiStruggle}</p>
+  `;
 
-  const bodyFragment = document.createDocumentFragment();
-
-  config.lobs.forEach((lob) => {
-    const tr = document.createElement("tr");
-    const rowHead = document.createElement("td");
-    rowHead.className = "row-head";
-    rowHead.textContent = lob.name;
-    tr.appendChild(rowHead);
-
-    config.stages.forEach((stage) => {
-      const td = document.createElement("td");
-      td.className = "cell available";
-      const l2s = lob.stages[stage.id] || [];
-
-      const l2Html = l2s
-        .map((l2) => {
-          const units = uniqueUnitsForL2(l2);
-          const match = !selectedUnit || units.includes(selectedUnit);
-          return `<button class="l2-item ${match ? "" : "dimmed"}" data-lob="${lob.id}" data-stage="${stage.id}" data-l2="${l2.id}">
-            <div class="l2-title">${l2.name}</div>
-            <div class="l2-meta">${(l2.activities || []).length} activities</div>
-            <div class="unit-dots">${units
-              .map((u) => `<span class="unit-dot ${u === selectedUnit ? "selected" : ""}" title="${unitLabel(u)}"></span>`)
-              .join("")}</div>
-          </button>`;
-        })
-        .join("");
-
-      td.innerHTML = `${l2Html}${editMode ? `<button class="mini-btn" data-add-l2="${lob.id}|${stage.id}">+ L2</button>` : ""}`;
-      tr.appendChild(td);
+  macroGrid.querySelectorAll("[data-macro]").forEach((node) => {
+    node.addEventListener("click", () => {
+      activeMacro = Number(node.dataset.macro);
+      renderMacro();
     });
-
-    bodyFragment.appendChild(tr);
-  });
-
-  matrix.appendChild(bodyFragment);
-
-  matrix.querySelectorAll(".l2-item").forEach((item) => {
-    item.onclick = () => {
-      const params = new URLSearchParams({
-        line: item.dataset.lob,
-        stage: item.dataset.stage,
-        l2: item.dataset.l2,
-        unit: selectedUnit || "",
-        edit: editMode ? "1" : "",
-      });
-      window.location.href = `details.html?${params.toString()}`;
-    };
-  });
-
-  matrix.querySelectorAll("[data-add-l2]").forEach((btn) => {
-    btn.onclick = () => {
-      const [lobId, stageId] = btn.dataset.addL2.split("|");
-      const name = prompt("New L2 name:");
-      if (!name) return;
-      const lob = config.lobs.find((l) => l.id === lobId);
-      lob.stages[stageId].push({ id: uid("l2"), name, activities: [] });
-      persistAndRender();
-    };
   });
 }
 
-function renderEditor() {
-  configEditor.value = JSON.stringify(config, null, 2);
-  configEditor.disabled = !editMode;
-  saveConfigBtn.disabled = !editMode;
-  resetConfigBtn.disabled = !editMode;
+function renderLayers() {
+  layerStrip.innerHTML = data.layers
+    .map((layer, idx) => `<button class="layer-btn ${idx === activeLayer ? "active" : ""}" data-layer="${idx}">${layer.name}</button>`)
+    .join("");
+
+  const current = data.layers[activeLayer];
+  layerDetails.innerHTML = `
+    <h3>${current.name}</h3>
+    <p><strong>Primary focus:</strong> ${current.focus}</p>
+    <p><strong>GenAI opportunity:</strong> ${current.ai}</p>
+  `;
+
+  layerStrip.querySelectorAll("[data-layer]").forEach((node) => {
+    node.addEventListener("click", () => {
+      activeLayer = Number(node.dataset.layer);
+      renderLayers();
+    });
+  });
 }
 
-function persistAndRender() {
-  const result = saveConfig(config);
-  statusLine.textContent = result.ok ? "Saved" : result.error;
-  render();
+function renderStakeholders() {
+  stakeholderList.innerHTML = data.stakeholders
+    .map(
+      (stakeholder, idx) =>
+        `<button class="${idx === activeStakeholder ? "active" : ""}" data-stakeholder="${idx}">${stakeholder.role}</button>`
+    )
+    .join("");
+
+  const current = data.stakeholders[activeStakeholder];
+  stakeholderDetail.innerHTML = `
+    <h3>${current.role}</h3>
+    <p><strong>Main KPIs:</strong></p>
+    <ul>${current.kpis.map((kpi) => `<li>${kpi}</li>`).join("")}</ul>
+    <p><strong>Macro pressures:</strong> ${current.impactedBy.join(", ")}</p>
+    <p><strong>KPI drivers:</strong></p>
+    <ul>${current.drivers.map((driver) => `<li>${driver}</li>`).join("")}</ul>
+    <p><strong>AI/GenAI impact levers:</strong></p>
+    <ul>${current.aiImpact.map((impact) => `<li>${impact}</li>`).join("")}</ul>
+  `;
+
+  stakeholderList.querySelectorAll("[data-stakeholder]").forEach((node) => {
+    node.addEventListener("click", () => {
+      activeStakeholder = Number(node.dataset.stakeholder);
+      renderStakeholders();
+    });
+  });
 }
 
-function render() {
-  renderUnitFilters();
-  renderMatrix();
-  renderEditor();
-  selectionInfo.textContent = selectedUnit
-    ? `Unit filter: ${unitLabel(selectedUnit)}.`
-    : "Click a unit to highlight mapped L2s. Single-click an L2 to open activities.";
-  document.querySelectorAll(".chip").forEach((chip) => chip.classList.toggle("active", chip.dataset.unit === selectedUnit));
+function renderThemes() {
+  const mode = maturityMap[Number(maturity.value)];
+  maturityLabel.textContent = maturityNames[Number(maturity.value)];
+
+  themeCards.innerHTML = data.themes
+    .map(
+      (theme) => `
+      <article class="theme-card">
+        <h3>${theme.title}</h3>
+        <p>${theme.why}</p>
+        <ul>${theme.plays[mode].map((play) => `<li>${play}</li>`).join("")}</ul>
+      </article>`
+    )
+    .join("");
 }
 
-async function bootstrap() {
-  config = await loadPreferredConfig();
-  render();
-}
+maturity.addEventListener("input", renderThemes);
 
-editToggle.onclick = () => {
-  editMode = !editMode;
-  editToggle.textContent = editMode ? "Exit Edit Mode" : "Enter Edit Mode";
-  statusLine.textContent = editMode
-    ? "Edit mode ON: you can add L2, edit JSON, drag activities on details page."
-    : "Edit mode OFF";
-  render();
-};
-
-saveConfigBtn.onclick = () => {
-  try {
-    const parsed = JSON.parse(configEditor.value);
-    const result = saveConfig(parsed);
-    if (!result.ok) return (statusLine.textContent = result.error);
-    config = loadConfig();
-    statusLine.textContent = "Configuration saved.";
-    render();
-  } catch {
-    statusLine.textContent = "Invalid JSON.";
-  }
-};
-
-resetConfigBtn.onclick = () => {
-  if (!confirm("Reset to default config?")) return;
-  config = resetConfig();
-  statusLine.textContent = "Reset to default.";
-  render();
-};
-
-downloadConfigBtn.onclick = () => {
-  const blob = new Blob([JSON.stringify(config, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "retail-value-chain-config.json";
-  a.click();
-};
-
-clearFilterBtn.onclick = () => {
-  selectedUnit = null;
-<<<<<<< HEAD
-  localStorage.removeItem("retail_selected_unit");
-=======
-<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
-  localStorage.removeItem("retail_selected_unit");
-=======
->>>>>>> main
->>>>>>> main
-  render();
-};
-
-bootstrap();
+renderTicker();
+renderMacro();
+renderLayers();
+renderStakeholders();
+renderThemes();

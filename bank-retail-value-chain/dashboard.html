@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBI KPI Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5v14M5 12h14"/></svg><span>SBI AI STRATEGY ATLAS</span></div>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="layers.html">Bank Stack</a>
+        <a href="dashboard.html" class="active">Data Dashboard</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="panel">
+        <h1>SBI financial stress dashboard</h1>
+        <p class="muted">Charts rendered from structured SBI dataset (`sbi_financials.json`) designed to align with an XBRL-to-JSON pipeline for NSE filings.</p>
+      </section>
+
+      <section class="panel">
+        <div class="legend-row">
+          <span><i class="dot blue"></i>NIM</span>
+          <span><i class="dot coral"></i>Cost-to-Income</span>
+          <span><i class="dot mint"></i>Gross NPA</span>
+        </div>
+        <canvas id="trendChart" height="120"></canvas>
+      </section>
+
+      <section class="panel two-col">
+        <div>
+          <h3>Business pressure heatmap</h3>
+          <canvas id="pressureChart" height="170"></canvas>
+        </div>
+        <div>
+          <h3>AI opportunity sizing (bps / cost)</h3>
+          <canvas id="aiImpactChart" height="170"></canvas>
+        </div>
+      </section>
+
+      <section class="panel-soft mono">
+        <strong>Data note:</strong> If a direct NSE XBRL endpoint is available in deployment, wire it into
+        <code>dashboard.js/loadFinancialData()</code> and replace the local JSON fallback.
+      </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>

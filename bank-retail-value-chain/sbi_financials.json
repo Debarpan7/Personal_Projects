@@ -1,0 +1,22 @@
+{
+  "source": "SBI structured financial extract (XBRL-ready schema, local fallback)",
+  "periods": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025"],
+  "nim_pct": [3.04, 3.12, 3.36, 3.28, 3.22],
+  "cost_to_income_pct": [52.1, 51.0, 49.4, 47.8, 48.3],
+  "gross_npa_pct": [4.98, 3.97, 2.78, 2.24, 2.12],
+  "pressure_by_layer": {
+    "Ecosystem": 62,
+    "Experience": 74,
+    "Front Office": 68,
+    "Middle Office": 79,
+    "Back Office": 71,
+    "Technology & Data": 76,
+    "Support": 58
+  },
+  "ai_impact": {
+    "Service resolution": 420,
+    "Credit factory": 610,
+    "Margin defense": 520,
+    "Compliance copilot": 360
+  }
+}

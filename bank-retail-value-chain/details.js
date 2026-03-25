@@ -9,13 +9,17 @@ const detailTitle = document.getElementById("detailTitle");
 const flowCanvas = document.getElementById("flowCanvas");
 const activeFilterInfo = document.getElementById("activeFilterInfo");
 const activityToolbar = document.getElementById("activityToolbar");
+<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
 const backLink = document.getElementById("backLink");
+=======
+>>>>>>> main
 
 let config = null;
 
 
 async function bootstrap() {
   config = await loadPreferredConfig();
+<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
   setBackLink();
   renderFlow();
 }
@@ -29,6 +33,11 @@ function setBackLink() {
   backLink.href = qs ? `index.html?${qs}` : "index.html";
 }
 
+=======
+  renderFlow();
+}
+
+>>>>>>> main
 function unitLabel(id) {
   return config.units.find((u) => u.id === id)?.label || id;
 }

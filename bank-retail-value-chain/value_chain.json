@@ -1,20 +1,75 @@
 {
   "units": [
-    { "id": "branch", "label": "Branch" },
-    { "id": "digital", "label": "Digital" },
-    { "id": "cpc", "label": "Central Processing Center" },
-    { "id": "rbo", "label": "Regional Business Office" },
-    { "id": "contact", "label": "Contact Center" },
-    { "id": "kyc", "label": "KYC / AML Ops" }
+    {
+      "id": "branch",
+      "label": "Branch"
+    },
+    {
+      "id": "digital",
+      "label": "Digital / YONO"
+    },
+    {
+      "id": "cpc",
+      "label": "Central Processing Centre"
+    },
+    {
+      "id": "rbo",
+      "label": "Regional Business Office"
+    },
+    {
+      "id": "contact",
+      "label": "Contact Centre"
+    },
+    {
+      "id": "kyc",
+      "label": "KYC / AML Ops"
+    },
+    {
+      "id": "legal",
+      "label": "Legal & Compliance"
+    },
+    {
+      "id": "treasury",
+      "label": "Treasury / ALM"
+    },
+    {
+      "id": "recovery",
+      "label": "Recovery & NPA Mgmt"
+    },
+    {
+      "id": "liabilities",
+      "label": "Liabilities Ops"
+    }
   ],
   "stages": [
-    { "id": "lead", "label": "Lead Generation" },
-    { "id": "origination", "label": "Origination" },
-    { "id": "assessment", "label": "Assessment" },
-    { "id": "fulfillment", "label": "Fulfillment" },
-    { "id": "service", "label": "Servicing" },
-    { "id": "risk", "label": "Risk / Compliance" },
-    { "id": "renewal", "label": "Renewal / Exit" }
+    {
+      "id": "lead",
+      "label": "Lead Generation"
+    },
+    {
+      "id": "origination",
+      "label": "Origination"
+    },
+    {
+      "id": "assessment",
+      "label": "Assessment"
+    },
+    {
+      "id": "fulfillment",
+      "label": "Fulfillment"
+    },
+    {
+      "id": "service",
+      "label": "Servicing"
+    },
+    {
+      "id": "risk",
+      "label": "Risk / Compliance"
+    },
+    {
+      "id": "renewal",
+      "label": "Renewal / Exit"
+    }
   ],
   "lobs": [
     {
@@ -23,39 +78,3922 @@
       "stages": {
         "lead": [
           {
-            "id": "hl-lead-1",
+            "id": "hl-l1",
             "name": "Campaign Sourcing",
             "activities": [
               {
-                "id": "a1",
-                "name": "Builder campaign lead capture",
+                "id": "hl-l1-a1",
+                "name": "Builder tie-up lead capture",
                 "assignments": [
-                  { "unitId": "branch", "person": "Sales Officer", "system": "CRM", "info": "Capture and qualify builder-sourced leads" },
-                  { "unitId": "digital", "person": "", "system": "Landing Funnel", "info": "Collect self-service leads" }
+                  {
+                    "unitId": "branch",
+                    "person": "Sales Officer",
+                    "system": "SBI CRM",
+                    "info": "Capture builder-sourced leads from project site visits and builder events"
+                  },
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO Landing Page",
+                    "info": "Self-service digital lead capture via YONO app; pre-populate form from Aadhaar"
+                  }
+                ]
+              },
+              {
+                "id": "hl-l1-a2",
+                "name": "PMAY / Govt scheme eligibility pre-screen",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "PMAY Portal",
+                    "info": "Screen for PMAY-CLSS subsidy eligibility (EWS/LIG/MIG-I/MIG-II); household income verification"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-l2",
+            "name": "Lead Qualification",
+            "activities": [
+              {
+                "id": "hl-l2-a1",
+                "name": "Income and obligation pre-screening",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "SBI CRM",
+                    "info": "Initial FOIR check, income document checklist, employer category"
+                  },
+                  {
+                    "unitId": "contact",
+                    "person": "Tele-caller",
+                    "system": "Dialix CRM",
+                    "info": "Warm outbound qualification for digital leads; schedule branch visit"
+                  }
+                ]
+              },
+              {
+                "id": "hl-l2-a2",
+                "name": "Property project approval check",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Technical Officer",
+                    "system": "Approved Project List",
+                    "info": "Verify if project is on SBI approved list; else initiate technical appraisal"
+                  }
                 ]
               }
             ]
           }
         ],
-        "origination": [],
-        "assessment": [],
-        "fulfillment": [],
-        "service": [],
-        "risk": [],
-        "renewal": []
+        "origination": [
+          {
+            "id": "hl-o1",
+            "name": "Application Intake",
+            "activities": [
+              {
+                "id": "hl-o1-a1",
+                "name": "Home loan application form (SBI-HL-1) submission",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "LOS (LoanSeva)",
+                    "info": "Assist walk-in customer with form fill, co-applicant details, property address"
+                  },
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO App",
+                    "info": "End-to-end digital application with Aadhaar e-KYC and e-consent"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-o2",
+            "name": "Document Collection",
+            "activities": [
+              {
+                "id": "hl-o2-a1",
+                "name": "KYC and income document upload",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "DMS (DocuVault)",
+                    "info": "Scan and index Aadhaar, PAN, ITR (3 yrs), salary slips (6 months), Form 16, bank statements"
+                  },
+                  {
+                    "unitId": "kyc",
+                    "person": "KYC Analyst",
+                    "system": "CKYC Registry",
+                    "info": "CKYC de-duplication; risk tag customer; link to CIF"
+                  }
+                ]
+              },
+              {
+                "id": "hl-o2-a2",
+                "name": "Property document collection",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Home Loan Officer",
+                    "system": "DMS",
+                    "info": "Sale deed / agreement to sell, title chain docs, EC (13/30 yr), approved building plan, OC/CC"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-o3",
+            "name": "KYC Onboarding",
+            "activities": [
+              {
+                "id": "hl-o3-a1",
+                "name": "Video KYC / biometric verification",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "KYC Analyst",
+                    "system": "VKYC Platform",
+                    "info": "Live video KYC per RBI circular; liveness check; AML risk scoring; PEP screening"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "hl-a1",
+            "name": "Credit Appraisal",
+            "activities": [
+              {
+                "id": "hl-a1-a1",
+                "name": "Credit bureau pull and scoring",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS + CIBIL / Experian / CRIF",
+                    "info": "Pull CIBIL TransUnion, Experian, CRIF; compute composite bureau score; check DPD history"
+                  }
+                ]
+              },
+              {
+                "id": "hl-a1-a2",
+                "name": "Income and obligation assessment",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS (LoanSeva)",
+                    "info": "Compute FOIR (≤50% NMI), net monthly income, existing EMI, eligible loan quantum"
+                  }
+                ]
+              },
+              {
+                "id": "hl-a1-a3",
+                "name": "Internal account conduct review",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Senior Credit Analyst",
+                    "system": "Finacle CBS",
+                    "info": "Review existing SBI SB/OD/loan account behaviour; average balance, cheque returns, sweep"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-a2",
+            "name": "Collateral Valuation",
+            "activities": [
+              {
+                "id": "hl-a2-a1",
+                "name": "Technical / property valuation",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Empanelled Valuer",
+                    "system": "Collateral Tracker",
+                    "info": "Site visit; market value + distress value estimate; construction quality; RERA compliance check"
+                  }
+                ]
+              },
+              {
+                "id": "hl-a2-a2",
+                "name": "Legal title search",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Empanelled Advocate",
+                    "system": "Legal MIS",
+                    "info": "Title clear certificate; 30-yr title chain; encumbrance check; search for pending litigations"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-a3",
+            "name": "Policy and Delegated Authority Check",
+            "activities": [
+              {
+                "id": "hl-a3-a1",
+                "name": "LTV check and sanction quantum approval",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Manager",
+                    "system": "LOS",
+                    "info": "Verify LTV ≤75% (>75L) / ≤80% (30-75L) / ≤90% (<30L); sanction within delegated authority matrix"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "hl-f1",
+            "name": "Sanction",
+            "activities": [
+              {
+                "id": "hl-f1-a1",
+                "name": "Sanction letter generation and delivery",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Maker",
+                    "system": "LOS",
+                    "info": "Generate sanction letter: loan amount, ROI (RLLR-linked), tenure, EMI, pre-conditions"
+                  },
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Checker",
+                    "system": "LOS",
+                    "info": "4-eye check; authorise and digitally sign sanction letter"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-f2",
+            "name": "Mortgage Creation",
+            "activities": [
+              {
+                "id": "hl-f2-a1",
+                "name": "Equitable / registered mortgage execution",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Legal Officer",
+                    "system": "Legal MIS",
+                    "info": "Registered mortgage: MOD/MODT at sub-registrar; equitable mortgage: deposit of title deeds"
+                  },
+                  {
+                    "unitId": "branch",
+                    "person": "Home Loan Officer",
+                    "system": "Finacle CBS",
+                    "info": "Charge creation in CBS; CERSAI filing within 30 days"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-f3",
+            "name": "Disbursal",
+            "activities": [
+              {
+                "id": "hl-f3-a1",
+                "name": "Tranche disbursal (under-construction property)",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Disbursement Ops",
+                    "system": "Finacle CBS",
+                    "info": "Stage-wise disbursal to builder account via RTGS/NEFT against construction progress certificate"
+                  }
+                ]
+              },
+              {
+                "id": "hl-f3-a2",
+                "name": "Full disbursal (ready-to-move property)",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Payments Ops",
+                    "system": "Finacle CBS",
+                    "info": "One-shot disbursal to seller / borrower; NACH EMI mandate registration; pre-EMI interest setup"
+                  }
+                ]
+              },
+              {
+                "id": "hl-f3-a3",
+                "name": "PMAY-CLSS subsidy claim filing",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Subsidy Ops",
+                    "system": "NHB / HUDCO PMAY Portal",
+                    "info": "Submit CLSS subsidy claim; track upfront credit to borrower account (NPV of subsidy)"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "hl-s1",
+            "name": "EMI and Repayment",
+            "activities": [
+              {
+                "id": "hl-s1-a1",
+                "name": "NACH EMI mandate setup and management",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "NACH Platform",
+                    "info": "Register, modify, cancel NACH debit mandate; manage bounce and re-presentation"
+                  }
+                ]
+              },
+              {
+                "id": "hl-s1-a2",
+                "name": "EMI query and statement resolution",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Service Agent",
+                    "system": "Service CRM",
+                    "info": "Handle EMI bounce queries, repayment schedule requests, interest certificate issuance"
+                  },
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Self-service: download statement, repayment schedule, interest certificate"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-s2",
+            "name": "Loan Account Requests",
+            "activities": [
+              {
+                "id": "hl-s2-a1",
+                "name": "Prepayment and part-payment processing",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Accept prepayment; recalculate amortisation schedule; update CBS; no prepayment charges (floating rate)"
+                  }
+                ]
+              },
+              {
+                "id": "hl-s2-a2",
+                "name": "Tenure / EMI restructure request",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Manager",
+                    "system": "LOS",
+                    "info": "Approve restructure request within policy; update CBS schedule; customer communication"
+                  }
+                ]
+              },
+              {
+                "id": "hl-s2-a3",
+                "name": "Co-applicant addition / deletion",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Home Loan Officer",
+                    "system": "LOS + Finacle CBS",
+                    "info": "Process co-borrower change; fresh KYC and credit check; legal documentation amendment"
+                  }
+                ]
+              },
+              {
+                "id": "hl-s2-a4",
+                "name": "Home loan insurance renewal (HLPP)",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Insurance Desk",
+                    "system": "SBI Life / SBI General Portal",
+                    "info": "Renew SBI Life HLPP; home structure insurance via SBI General; single-premium add-on"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-s3",
+            "name": "Interest Rate Management",
+            "activities": [
+              {
+                "id": "hl-s3-a1",
+                "name": "RLLR / MCLR reset communication",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "Bulk rate reset on anniversary / reset date; SMS/email/account statement notification to borrower"
+                  }
+                ]
+              },
+              {
+                "id": "hl-s3-a2",
+                "name": "Balance transfer (inward) processing",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Home Loan Officer",
+                    "system": "LOS",
+                    "info": "Evaluate BT from other bank; fresh technical/legal if required; disburse BPO to outgoing lender"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "hl-r1",
+            "name": "Portfolio Monitoring",
+            "activities": [
+              {
+                "id": "hl-r1-a1",
+                "name": "EWS and SMA classification",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Risk Manager",
+                    "system": "EWS Dashboard",
+                    "info": "Monthly EWS run; SMA-0 (30 DPD), SMA-1 (31-60), SMA-2 (61-90) tagging per RBI IRAC norms"
+                  }
+                ]
+              },
+              {
+                "id": "hl-r1-a2",
+                "name": "Collateral / property value monitoring",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Portfolio Analyst",
+                    "system": "Collateral Tracker",
+                    "info": "Annual market value refresh; trigger re-valuation if LTV breaches threshold; distress flag"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-r2",
+            "name": "Collections and Recovery",
+            "activities": [
+              {
+                "id": "hl-r2-a1",
+                "name": "DPD 1-30 early-stage follow-up",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Collections Agent",
+                    "system": "Collections CRM",
+                    "info": "Automated IVR + SMS + human outbound; promise-to-pay capture; alternate payment arrangement"
+                  }
+                ]
+              },
+              {
+                "id": "hl-r2-a2",
+                "name": "DPD 31-90 field visit and notice",
+                "assignments": [
+                  {
+                    "unitId": "recovery",
+                    "person": "Recovery Officer",
+                    "system": "NPA MIS",
+                    "info": "Field visit; Sec 13(2) demand notice under SARFAESI if >90 DPD; restructure option explore"
+                  }
+                ]
+              },
+              {
+                "id": "hl-r2-a3",
+                "name": "NPA declaration and SARFAESI possession",
+                "assignments": [
+                  {
+                    "unitId": "recovery",
+                    "person": "Recovery Officer",
+                    "system": "NPA MIS",
+                    "info": "Declare NPA; Sec 13(4) symbolic / physical possession; e-auction via SARFAESI"
+                  },
+                  {
+                    "unitId": "legal",
+                    "person": "Legal Officer",
+                    "system": "Legal MIS",
+                    "info": "File DRT / DRAT for contested cases; obtain possession order"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-r3",
+            "name": "Regulatory Compliance",
+            "activities": [
+              {
+                "id": "hl-r3-a1",
+                "name": "CERSAI charge registration and satisfaction",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Legal Officer",
+                    "system": "CERSAI Portal",
+                    "info": "Register equitable mortgage charge within 30 days of creation; satisfaction on closure"
+                  }
+                ]
+              },
+              {
+                "id": "hl-r3-a2",
+                "name": "RBI and NHB regulatory reporting",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Compliance Officer",
+                    "system": "RBI XBRL / NHB Returns",
+                    "info": "Monthly/quarterly returns: housing loan portfolio, SMA/NPA, LTV distribution, PMAY data"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "hl-rn1",
+            "name": "Top-up and Enhancement",
+            "activities": [
+              {
+                "id": "hl-rn1-a1",
+                "name": "Top-up loan offer and processing",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO Offer Engine",
+                    "info": "Pre-approved top-up push for accounts with clean 24-month track record and residual LTV headroom"
+                  },
+                  {
+                    "unitId": "branch",
+                    "person": "Home Loan Officer",
+                    "system": "LOS",
+                    "info": "Fresh income assessment; updated valuation if >3 yrs; sanction and disburse top-up"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hl-rn2",
+            "name": "Loan Closure",
+            "activities": [
+              {
+                "id": "hl-rn2-a1",
+                "name": "Foreclosure statement and payment",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Maker",
+                    "system": "Finacle CBS",
+                    "info": "Compute foreclosure amount: principal + accrued interest + charges; issue statement"
+                  }
+                ]
+              },
+              {
+                "id": "hl-rn2-a2",
+                "name": "NOC issuance and original document return",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Ops Officer",
+                    "system": "DMS",
+                    "info": "Issue No Objection Certificate; return original title deeds, chain documents to borrower"
+                  }
+                ]
+              },
+              {
+                "id": "hl-rn2-a3",
+                "name": "CERSAI charge satisfaction filing",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Legal Officer",
+                    "system": "CERSAI Portal",
+                    "info": "File satisfaction of mortgage charge within 30 days of full repayment"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "id": "personal-loans",
       "name": "Personal Loans",
       "stages": {
-        "lead": [],
-        "origination": [],
-        "assessment": [],
-        "fulfillment": [],
-        "service": [],
-        "risk": [],
-        "renewal": []
+        "lead": [
+          {
+            "id": "pl-l1",
+            "name": "Pre-approved and Targeted Offers",
+            "activities": [
+              {
+                "id": "pl-l1-a1",
+                "name": "YONO pre-approved loan push",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / Offer Engine",
+                    "info": "CBS-data-driven pre-approved limit push to eligible salary and pension account holders; instant accept"
+                  }
+                ]
+              },
+              {
+                "id": "pl-l1-a2",
+                "name": "Payroll scheme and corporate tie-up leads",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Manager",
+                    "system": "SBI CRM",
+                    "info": "Identify corporate salary account holders; arrange pre-sanction scheme with employer HR"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "pl-l2",
+            "name": "Inbound Lead Capture",
+            "activities": [
+              {
+                "id": "pl-l2-a1",
+                "name": "Branch walk-in enquiry logging",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Sales Officer",
+                    "system": "SBI CRM",
+                    "info": "Capture walk-in PL enquiries; log income type, amount required, purpose"
+                  }
+                ]
+              },
+              {
+                "id": "pl-l2-a2",
+                "name": "Contact centre inbound lead",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Inbound Agent",
+                    "system": "Dialix CRM",
+                    "info": "Telephonic enquiry capture; eligibility pre-check; route to branch or STP digital journey"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "pl-o1",
+            "name": "Application Intake",
+            "activities": [
+              {
+                "id": "pl-o1-a1",
+                "name": "Digital STP application (YONO)",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO App",
+                    "info": "Straight-through for pre-approved: CBS pre-fill, Aadhaar e-KYC, e-sign DPN, instant disbursal"
+                  }
+                ]
+              },
+              {
+                "id": "pl-o1-a2",
+                "name": "Assisted branch application",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "LOS (LoanSeva)",
+                    "info": "Form fill assistance; physical KYC verification; document checklist issue"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "pl-o2",
+            "name": "Document and KYC",
+            "activities": [
+              {
+                "id": "pl-o2-a1",
+                "name": "KYC verification",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "KYC Analyst",
+                    "system": "CKYC / VKYC",
+                    "info": "OTP-based Aadhaar auth for existing customers; VKYC for new-to-bank applicants"
+                  }
+                ]
+              },
+              {
+                "id": "pl-o2-a2",
+                "name": "Salary and income document collection",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Staff",
+                    "system": "DMS",
+                    "info": "Latest 3 salary slips, Form 16, latest ITR; pension PPO for pensioner loans; bank statements 6 months"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "pl-a1",
+            "name": "Automated Credit Decisioning",
+            "activities": [
+              {
+                "id": "pl-a1-a1",
+                "name": "Bureau score pull and policy check",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS + CIBIL",
+                    "info": "Real-time CIBIL pull; minimum score cutoff per segment; DPD and write-off history check"
+                  }
+                ]
+              },
+              {
+                "id": "pl-a1-a2",
+                "name": "SBI internal scorecard",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS Decision Engine",
+                    "info": "Score on tenure with SBI, salary vintage, vintage of account conduct, product cross-hold"
+                  }
+                ]
+              },
+              {
+                "id": "pl-a1-a3",
+                "name": "FOIR and eligible EMI computation",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS",
+                    "info": "Net take-home, existing EMI obligations; max eligible EMI (FOIR ≤50%); quantum and tenor fix"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "pl-a2",
+            "name": "Manual Credit Review (exceptions)",
+            "activities": [
+              {
+                "id": "pl-a2-a1",
+                "name": "Credit manager override for borderline cases",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Manager",
+                    "system": "LOS",
+                    "info": "Document override rationale; approve or decline with note; within delegated authority limit"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "pl-f1",
+            "name": "Sanction and Documentation",
+            "activities": [
+              {
+                "id": "pl-f1-a1",
+                "name": "Digital sanction letter generation",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Maker",
+                    "system": "LOS",
+                    "info": "Auto-generate sanction letter with amount, ROI, tenure, processing fee; e-deliver to customer"
+                  }
+                ]
+              },
+              {
+                "id": "pl-f1-a2",
+                "name": "Loan agreement and DPN execution",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "e-Sign Platform",
+                    "info": "Aadhaar-based e-sign of DPN and loan agreement; NSDL e-stamp if required by state"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "pl-f2",
+            "name": "Disbursal",
+            "activities": [
+              {
+                "id": "pl-f2-a1",
+                "name": "Instant credit to linked SBI savings account",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Payments Ops",
+                    "system": "Finacle CBS",
+                    "info": "Real-time intra-bank credit for STP loans; processing fee deduction at source"
+                  }
+                ]
+              },
+              {
+                "id": "pl-f2-a2",
+                "name": "NACH EMI mandate registration",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "NACH Platform",
+                    "info": "Register EMI debit mandate via NPCI NACH; confirm activation before first EMI due"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "pl-s1",
+            "name": "EMI and Account Management",
+            "activities": [
+              {
+                "id": "pl-s1-a1",
+                "name": "EMI bounce handling",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Service Agent",
+                    "system": "Service CRM",
+                    "info": "Notify customer on NACH bounce; arrange alternate IMPS/UPI payment; penal charge waiver if applicable"
+                  }
+                ]
+              },
+              {
+                "id": "pl-s1-a2",
+                "name": "Statement and certificate issuance",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Self-service: interest certificate for IT return, account statement, repayment schedule download"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "pl-s2",
+            "name": "Customer Service Requests",
+            "activities": [
+              {
+                "id": "pl-s2-a1",
+                "name": "Prepayment and foreclosure",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Accept prepayment; no charges on floating rate PL; recalculate schedule; issue fresh amortisation"
+                  }
+                ]
+              },
+              {
+                "id": "pl-s2-a2",
+                "name": "Top-up loan application",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO",
+                    "info": "Offer top-up after 12 clean EMIs; STP for pre-approved existing borrowers; fresh bureau check"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "pl-r1",
+            "name": "Portfolio and Delinquency Monitoring",
+            "activities": [
+              {
+                "id": "pl-r1-a1",
+                "name": "DPD bucket and vintage analysis",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Portfolio Analyst",
+                    "system": "EWS Dashboard",
+                    "info": "Weekly DPD bucket tracking (0–30, 31–60, 61–90, 90+); monthly vintage cohort analysis"
+                  }
+                ]
+              },
+              {
+                "id": "pl-r1-a2",
+                "name": "Early delinquency intervention",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Collections Agent",
+                    "system": "Collections CRM",
+                    "info": "IVR + tele-calling for 1-30 DPD; promise-to-pay capture; digital payment link dispatch"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "pl-r2",
+            "name": "NPA Management",
+            "activities": [
+              {
+                "id": "pl-r2-a1",
+                "name": "OTS and write-off proposal",
+                "assignments": [
+                  {
+                    "unitId": "recovery",
+                    "person": "Recovery Officer",
+                    "system": "NPA MIS",
+                    "info": "One-time settlement proposal; legal recovery via Lok Adalat, DRT; write-off with board approval"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "pl-rn1",
+            "name": "Renewal and Re-finance",
+            "activities": [
+              {
+                "id": "pl-rn1-a1",
+                "name": "Fresh pre-approved offer at maturity",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO Offer Engine",
+                    "info": "Proactive renewal offer 60 days before final EMI; updated limit based on current income and bureau"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "pl-rn2",
+            "name": "Closure",
+            "activities": [
+              {
+                "id": "pl-rn2-a1",
+                "name": "Foreclosure statement and closure",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Issue foreclosure statement; mark loan closed in CBS; update CIBIL; issue closure letter"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "savings",
+      "name": "Savings Accounts",
+      "stages": {
+        "lead": [
+          {
+            "id": "sa-l1",
+            "name": "Lead Sourcing",
+            "activities": [
+              {
+                "id": "sa-l1-a1",
+                "name": "Jan Dhan and financial inclusion camp",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Branch Manager",
+                    "system": "PMJDY Portal",
+                    "info": "Open BSBDA accounts at BLF and financial inclusion camps; zero-balance; RuPay debit card"
+                  }
+                ]
+              },
+              {
+                "id": "sa-l1-a2",
+                "name": "Digital referral and YONO acquisition",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO App",
+                    "info": "Referral code-based acquisition; instant digital account opening; VKYC onboarding"
+                  }
+                ]
+              },
+              {
+                "id": "sa-l1-a3",
+                "name": "Salary account corporate sourcing",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Corporate RM",
+                    "system": "SBI CRM",
+                    "info": "Tie-up with corporates for payroll routing to SBI salary package accounts"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "sa-o1",
+            "name": "Account Opening",
+            "activities": [
+              {
+                "id": "sa-o1-a1",
+                "name": "Digital account opening via YONO",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO + VKYC",
+                    "info": "Aadhaar OTP auth or VKYC; instant account number; virtual debit card; no branch visit required"
+                  }
+                ]
+              },
+              {
+                "id": "sa-o1-a2",
+                "name": "Branch-assisted account opening",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "Finacle CBS",
+                    "info": "Physical AOF; Aadhaar/PAN original verification; photo; CBS CIF creation and account number generation"
+                  }
+                ]
+              },
+              {
+                "id": "sa-o1-a3",
+                "name": "Business Correspondent (BC) channel opening",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "BC Agent",
+                    "system": "BC MIS / Finacle",
+                    "info": "Doorstep account opening for rural / semi-urban segments via authorised BC agents; biometric auth"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "sa-o2",
+            "name": "KYC Onboarding",
+            "activities": [
+              {
+                "id": "sa-o2-a1",
+                "name": "CKYC filing and deduplication",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "KYC Analyst",
+                    "system": "CKYC Registry",
+                    "info": "CKYC number generation or linkage; AML risk category (low/medium/high); PEP flag check"
+                  }
+                ]
+              },
+              {
+                "id": "sa-o2-a2",
+                "name": "PAN and Form 60 linkage",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "Finacle CBS",
+                    "info": "Link PAN to account for TDS compliance; collect Form 60 for non-PAN holders; update ITD"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "sa-a1",
+            "name": "Account Variant Suitability",
+            "activities": [
+              {
+                "id": "sa-a1-a1",
+                "name": "Product variant selection",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "Product Catalogue",
+                    "info": "Select variant: BSBDA, Insta Plus, Savings Plus, Classic Advantage, salary, pension, senior citizen, minor, NRI (NRE/NRO)"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "sa-f1",
+            "name": "Account Activation",
+            "activities": [
+              {
+                "id": "sa-f1-a1",
+                "name": "Initial deposit and welcome kit issuance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Teller",
+                    "system": "Finacle CBS",
+                    "info": "Accept initial deposit (if applicable); issue passbook, welcome letter, cheque book request"
+                  }
+                ]
+              },
+              {
+                "id": "sa-f1-a2",
+                "name": "Debit card, internet banking and UPI activation",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB / BHIM SBI",
+                    "info": "Activate debit card (green-PIN via ATM or YONO); register INB/mobile banking; UPI link via BHIM SBI Pay"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "sa-f2",
+            "name": "Nomination and Standing Instructions",
+            "activities": [
+              {
+                "id": "sa-f2-a1",
+                "name": "Nomination registration",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "Finacle CBS",
+                    "info": "Register nominee per Banking Regulation Act; obtain nominee details, relationship, dob"
+                  }
+                ]
+              },
+              {
+                "id": "sa-f2-a2",
+                "name": "Standing instructions and auto-sweep setup",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Auto-sweep to FD (Flexi Deposit); SIP linkage to SBI MF; recurring transfer instructions"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "sa-s1",
+            "name": "Transaction Services",
+            "activities": [
+              {
+                "id": "sa-s1-a1",
+                "name": "Cash deposit and withdrawal",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Teller",
+                    "system": "Finacle CBS",
+                    "info": "Counter cash transactions; CTR for cash >₹10L; CDM / passbook printer for self-service"
+                  }
+                ]
+              },
+              {
+                "id": "sa-s1-a2",
+                "name": "Fund transfer (NEFT/RTGS/IMPS/UPI)",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB / BHIM SBI",
+                    "info": "Real-time 24×7 fund transfer; IMPS up to ₹5L; RTGS above ₹2L; UPI via BHIM SBI Pay"
+                  }
+                ]
+              },
+              {
+                "id": "sa-s1-a3",
+                "name": "Demand draft and pay order issuance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Teller",
+                    "system": "Finacle CBS",
+                    "info": "Issue DDs and pay orders; charge as per schedule; centralized DD printing for outstation"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "sa-s2",
+            "name": "Account Maintenance",
+            "activities": [
+              {
+                "id": "sa-s2-a1",
+                "name": "Address, mobile and email update",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "Finacle CBS",
+                    "info": "Update contact details with OTP and ID verification; mobile update via self-service kiosk"
+                  }
+                ]
+              },
+              {
+                "id": "sa-s2-a2",
+                "name": "Periodic KYC re-verification",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "KYC Analyst",
+                    "system": "CKYC Registry",
+                    "info": "Periodic KYC refresh: 2 yrs (high risk), 8 yrs (medium), 10 yrs (low risk); per RBI Master Directions"
+                  }
+                ]
+              },
+              {
+                "id": "sa-s2-a3",
+                "name": "Locker allotment",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Branch Manager",
+                    "system": "Locker MIS",
+                    "info": "Allot locker on availability; execute locker agreement; collect 3-yr advance rent + security deposit"
+                  }
+                ]
+              },
+              {
+                "id": "sa-s2-a4",
+                "name": "Cheque book issuance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "Finacle CBS",
+                    "info": "Issue CTS-2010 compliant cheque book; track inventory; courier delivery option"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "sa-s3",
+            "name": "Value-Added and Cross-Sell Services",
+            "activities": [
+              {
+                "id": "sa-s3-a1",
+                "name": "SBI Life and SBI General insurance cross-sell",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Insurance Desk (CIF)",
+                    "system": "SBI Life / SBI General Portal",
+                    "info": "Home, motor, health, term insurance cross-sell at new account opening and service interactions"
+                  }
+                ]
+              },
+              {
+                "id": "sa-s3-a2",
+                "name": "SBI MF and investment product subscription",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO Invest",
+                    "info": "KYC-linked SIP, lumpsum, NPS subscription via YONO Invest; BSE StarMF interface; eNPS"
+                  }
+                ]
+              },
+              {
+                "id": "sa-s3-a3",
+                "name": "Atal Pension Yojana and govt scheme enrolment",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "APY / PMSBY / PMJJBY Portal",
+                    "info": "Enrol in APY, PMSBY (accident), PMJJBY (life) via savings account auto-debit"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "sa-r1",
+            "name": "AML and Fraud Monitoring",
+            "activities": [
+              {
+                "id": "sa-r1-a1",
+                "name": "Transaction monitoring for AML",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "AML Analyst",
+                    "system": "AML Monitoring System (Actimize)",
+                    "info": "Rule-based and ML transaction monitoring; STR/CTR/SCR filing to FIU-IND; FATF typology screening"
+                  }
+                ]
+              },
+              {
+                "id": "sa-r1-a2",
+                "name": "Fraud alert and account freeze",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Fraud Ops Agent",
+                    "system": "Fraud Management System",
+                    "info": "Real-time fraud alert on unusual transactions; outbound verification call; hot-mark card or freeze account"
+                  }
+                ]
+              },
+              {
+                "id": "sa-r1-a3",
+                "name": "Cyber fraud reversal (PFMS / I4C)",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Fraud Ops Agent",
+                    "system": "NPCI / I4C Portal",
+                    "info": "Initiate transaction reversal for reported cyber frauds via NPCI dispute portal and I4C NCRP; LOC freeze"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "sa-r2",
+            "name": "Dormancy and Unclaimed Funds",
+            "activities": [
+              {
+                "id": "sa-r2-a1",
+                "name": "Dormancy classification and restriction",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "Tag accounts inoperative (>2 yrs no customer-induced transaction); restrict debits; notify customer"
+                  }
+                ]
+              },
+              {
+                "id": "sa-r2-a2",
+                "name": "Unclaimed deposits transfer to RBI DEAF",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Compliance Ops",
+                    "system": "DEAF Portal / RBI",
+                    "info": "Transfer 10-yr unclaimed balances to RBI Depositor Education and Awareness Fund; annual IEPF reporting"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "sa-rn1",
+            "name": "Upgrade and Migration",
+            "activities": [
+              {
+                "id": "sa-rn1-a1",
+                "name": "Account variant upgrade",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "Finacle CBS",
+                    "info": "Migrate BSBDA to regular savings; basic to Savings Plus or Priority Banking on balance / income eligibility"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "sa-rn2",
+            "name": "Account Closure",
+            "activities": [
+              {
+                "id": "sa-rn2-a1",
+                "name": "Customer-initiated account closure",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Verify identity; collect passbook and debit card; refund balance via DD or NEFT; deactivate all services"
+                  }
+                ]
+              },
+              {
+                "id": "sa-rn2-a2",
+                "name": "Deceased account settlement",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Branch Manager",
+                    "system": "Finacle CBS + Legal MIS",
+                    "info": "Obtain death certificate; succession certificate or legal heir affidavit; KYC of claimant; settle balance"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fixed-deposits",
+      "name": "Fixed Deposits",
+      "stages": {
+        "lead": [
+          {
+            "id": "fd-l1",
+            "name": "Lead Generation",
+            "activities": [
+              {
+                "id": "fd-l1-a1",
+                "name": "Rate card and campaign publishing",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / SBI Website",
+                    "info": "Publish FD rate card; push notifications for rate revision; compare with competition on digital channels"
+                  }
+                ]
+              },
+              {
+                "id": "fd-l1-a2",
+                "name": "Tax-saver FD 80C campaign (Q4)",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Sales Officer",
+                    "system": "SBI CRM",
+                    "info": "Targeted outreach to HNI and salary account holders in Jan-Mar for SBI Tax Saving FD (5-yr lock-in)"
+                  }
+                ]
+              },
+              {
+                "id": "fd-l1-a3",
+                "name": "Senior citizen and pensioner outreach",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "SBI CRM",
+                    "info": "Offer senior citizen FD (additional 50 bps); SCSS comparison; pension account holders targeted"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "fd-o1",
+            "name": "FD Booking",
+            "activities": [
+              {
+                "id": "fd-o1-a1",
+                "name": "Online FD booking (YONO / INB)",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / Internet Banking",
+                    "info": "Instant FD booking from linked SB account; TDR or STDR selection; auto-renew instruction; e-receipt"
+                  }
+                ]
+              },
+              {
+                "id": "fd-o1-a2",
+                "name": "Branch-assisted FD booking",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Teller / Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Accept AOF; validate KYC linkage; generate FD receipt; collect cheque / cash / debit from SB account"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "fd-a1",
+            "name": "Product and Tenor Selection",
+            "activities": [
+              {
+                "id": "fd-a1-a1",
+                "name": "TDR vs STDR suitability",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "Product Catalogue",
+                    "info": "Advise: TDR (quarterly interest payout) for income-seekers; STDR (cumulative) for wealth-builders"
+                  }
+                ]
+              },
+              {
+                "id": "fd-a1-a2",
+                "name": "Senior citizen additional rate check",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Apply +50 bps for senior citizens (age ≥60); verify date of birth; apply SBI WECARE for 5-yr+ FDs"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "fd-f1",
+            "name": "FD Activation",
+            "activities": [
+              {
+                "id": "fd-f1-a1",
+                "name": "FD advice and receipt issuance",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "Generate FD receipt with account no., amount, tenor, maturity date, interest rate; deliver physical or e-receipt"
+                  }
+                ]
+              },
+              {
+                "id": "fd-f1-a2",
+                "name": "OD against FD setup",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Create OD account linked to FD (up to 90% of FD value); set interest rate (FD rate + 1%)"
+                  }
+                ]
+              },
+              {
+                "id": "fd-f1-a3",
+                "name": "Nomination and Form 15G/H linkage",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "Finacle CBS / TRACES",
+                    "info": "Register nominee for FD; accept 15G (non-senior) or 15H (senior) for nil TDS; upload to TRACES"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "fd-s1",
+            "name": "FD Operations",
+            "activities": [
+              {
+                "id": "fd-s1-a1",
+                "name": "Interest credit and payout",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "Quarterly / monthly / annual interest credit to linked SB account as per TDR instruction"
+                  }
+                ]
+              },
+              {
+                "id": "fd-s1-a2",
+                "name": "Premature withdrawal processing",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Process premature closure; apply penalty (0.5-1% reduction from contracted rate); calculate net payout"
+                  }
+                ]
+              },
+              {
+                "id": "fd-s1-a3",
+                "name": "Auto-renewal and standing instruction management",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Manage auto-renewal instructions (P+I or P only); change tenor or payout instruction; cancel renewal"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "fd-s2",
+            "name": "TDS Compliance",
+            "activities": [
+              {
+                "id": "fd-s2-a1",
+                "name": "TDS deduction and Form 16A issuance",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Compliance Ops",
+                    "system": "TDS Module (Finacle)",
+                    "info": "Deduct TDS @10% on interest >₹40,000 (₹50,000 seniors); quarterly deposit to IT Dept; issue Form 16A"
+                  }
+                ]
+              },
+              {
+                "id": "fd-s2-a2",
+                "name": "Form 15G / 15H upload to TRACES",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "TRACES Portal",
+                    "info": "Collect and upload 15G/H declarations each financial year; apply nil TDS flag in CBS; track validity"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "fd-r1",
+            "name": "Fraud and Regulatory Monitoring",
+            "activities": [
+              {
+                "id": "fd-r1-a1",
+                "name": "Suspicious premature withdrawal alert",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "AML Analyst",
+                    "system": "AML Monitoring System",
+                    "info": "Flag coordinated premature withdrawals on multiple accounts; OTP-based auth for large premature closures"
+                  }
+                ]
+              },
+              {
+                "id": "fd-r1-a2",
+                "name": "Deceased FD claim vigilance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Branch Manager",
+                    "system": "Finacle CBS",
+                    "info": "Scrutinise death certificate authenticity; check for joint holder survivorship; prevent fraudulent claims"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "fd-rn1",
+            "name": "Maturity and Renewal",
+            "activities": [
+              {
+                "id": "fd-rn1-a1",
+                "name": "Maturity notification",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / SMS Gateway",
+                    "info": "SMS + YONO push notification 30 days and 7 days before maturity; email to registered ID"
+                  }
+                ]
+              },
+              {
+                "id": "fd-rn1-a2",
+                "name": "Maturity settlement or renewal execution",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "On maturity: execute standing renewal instruction or credit P+I to linked SB account; update tax records"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "recurring-deposits",
+      "name": "Recurring Deposits",
+      "stages": {
+        "lead": [
+          {
+            "id": "rd-l1",
+            "name": "Lead Generation",
+            "activities": [
+              {
+                "id": "rd-l1-a1",
+                "name": "SIP-equivalent RD campaign",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Promote RD as disciplined savings tool; SIP-like messaging for salaried and youth segments via YONO push"
+                  }
+                ]
+              },
+              {
+                "id": "rd-l1-a2",
+                "name": "Branch cross-sell at account opening",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "SBI CRM",
+                    "info": "Cross-sell RD to new SB account holders; goal-based savings framing"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "rd-o1",
+            "name": "RD Account Opening",
+            "activities": [
+              {
+                "id": "rd-o1-a1",
+                "name": "Online RD setup (YONO / INB)",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Instant RD creation with standing instruction from SB account; minimum ₹100/month; flexible tenor"
+                  }
+                ]
+              },
+              {
+                "id": "rd-o1-a2",
+                "name": "Branch-assisted RD opening",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Teller",
+                    "system": "Finacle CBS",
+                    "info": "Complete RD form; set installment date; NACH or standing instruction registration for monthly debit"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "rd-a1",
+            "name": "Product Suitability",
+            "activities": [
+              {
+                "id": "rd-a1-a1",
+                "name": "Installment amount and tenor selection",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Product Catalogue",
+                    "info": "Advise on installment sizing vs. savings goal; compare RD maturity value vs FD for same corpus"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "rd-f1",
+            "name": "RD Activation",
+            "activities": [
+              {
+                "id": "rd-f1-a1",
+                "name": "Standing instruction and passbook issuance",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "Set up auto-debit SI; generate RD passbook / e-receipt; first installment debit confirmation"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "rd-s1",
+            "name": "Installment and Account Management",
+            "activities": [
+              {
+                "id": "rd-s1-a1",
+                "name": "Missed installment penalty and recovery",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Service Agent",
+                    "system": "Service CRM",
+                    "info": "Notify customer of missed installment; collect arrear with penalty; avoid account delinquency"
+                  }
+                ]
+              },
+              {
+                "id": "rd-s1-a2",
+                "name": "Premature withdrawal",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Process premature closure; apply penalty on interest; credit net amount to linked SB account"
+                  }
+                ]
+              },
+              {
+                "id": "rd-s1-a3",
+                "name": "RD loan / OD against RD",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Service Officer",
+                    "system": "Finacle CBS",
+                    "info": "Offer OD up to 90% of RD accumulated value; interest: RD rate + 2%; no premature closure needed"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "rd-r1",
+            "name": "Delinquency and Dormancy",
+            "activities": [
+              {
+                "id": "rd-r1-a1",
+                "name": "Defaulted installment tracking",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "Track consecutive defaults (>4 allowed); auto-mark as irregular; notify branch for follow-up"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "rd-rn1",
+            "name": "Maturity and Re-investment",
+            "activities": [
+              {
+                "id": "rd-rn1-a1",
+                "name": "Maturity payout and re-investment offer",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / SMS Gateway",
+                    "info": "Notify 30 days before maturity; offer FD or fresh RD rollover; credit maturity proceeds to SB account"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "auto-loans",
+      "name": "Auto Loans",
+      "stages": {
+        "lead": [
+          {
+            "id": "al-l1",
+            "name": "Dealer and Digital Lead Capture",
+            "activities": [
+              {
+                "id": "al-l1-a1",
+                "name": "Dealer showroom lead capture",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Sales Officer",
+                    "system": "SBI CRM",
+                    "info": "Leads from empanelled dealers (Maruti, Hyundai, Tata, Mahindra); dedicated dealer helpdesk"
+                  }
+                ]
+              },
+              {
+                "id": "al-l1-a2",
+                "name": "SBI Green Car Loan (EV) promotion",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / SBI Website",
+                    "info": "Push SBI Green Car Loan at lower ROI for EVs; co-campaign with Tata Motors, MG, Ola Electric"
+                  }
+                ]
+              },
+              {
+                "id": "al-l1-a3",
+                "name": "Pre-approved auto loan offer (YONO)",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO Offer Engine",
+                    "info": "CBS-based pre-approved car loan offer to salary and FD customers meeting eligibility"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "al-o1",
+            "name": "Application and Documentation",
+            "activities": [
+              {
+                "id": "al-o1-a1",
+                "name": "Loan application and document collection",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "LOS (LoanSeva)",
+                    "info": "Collect application, KYC docs, income proof, vehicle proforma invoice or RC for used vehicle"
+                  }
+                ]
+              },
+              {
+                "id": "al-o1-a2",
+                "name": "Digital STP application (YONO)",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO App",
+                    "info": "Straight-through processing for pre-approved cases; upload invoice; Aadhaar e-KYC; instant sanction"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "al-a1",
+            "name": "Credit and Vehicle Assessment",
+            "activities": [
+              {
+                "id": "al-a1-a1",
+                "name": "Bureau and income eligibility check",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS + CIBIL",
+                    "info": "CIBIL pull; FOIR (≤50%); income-based EMI computation; SBI internal score; margin money check"
+                  }
+                ]
+              },
+              {
+                "id": "al-a1-a2",
+                "name": "Vehicle valuation and RC verification (used)",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Field Investigator",
+                    "system": "Vehicle Registry / Vahan",
+                    "info": "For used vehicles: physical inspection; Vahan RC check; existing hypothecation; valuation (VIAI / HDFC)"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "al-f1",
+            "name": "Sanction and Disbursement",
+            "activities": [
+              {
+                "id": "al-f1-a1",
+                "name": "Sanction and payment to dealer / seller",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Disbursement Ops",
+                    "system": "Finacle CBS",
+                    "info": "Issue sanction; pay dealer directly via RTGS/NEFT; margin money confirmation from customer"
+                  }
+                ]
+              },
+              {
+                "id": "al-f1-a2",
+                "name": "Hypothecation with RTO via Vahan portal",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Ops Officer",
+                    "system": "Vahan / Parivahan Portal",
+                    "info": "Register SBI as hypothecation holder on RC; file Form 34/35; coordinate with dealer for endorsement"
+                  }
+                ]
+              },
+              {
+                "id": "al-f1-a3",
+                "name": "NACH EMI mandate setup",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "NACH Platform",
+                    "info": "Register NACH debit mandate; confirm activation before first EMI due date"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "al-s1",
+            "name": "EMI and Account Servicing",
+            "activities": [
+              {
+                "id": "al-s1-a1",
+                "name": "EMI management, bounce handling, prepayment",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Service Agent",
+                    "system": "Service CRM",
+                    "info": "EMI queries; bounce notification; prepayment processing; no foreclosure charges after 6 months"
+                  }
+                ]
+              },
+              {
+                "id": "al-s1-a2",
+                "name": "Motor insurance renewal reminder",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Insurance Desk",
+                    "system": "SBI General Portal",
+                    "info": "Remind borrower of mandatory motor insurance renewal; cross-sell SBI General motor insurance"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "al-r1",
+            "name": "Delinquency and Recovery",
+            "activities": [
+              {
+                "id": "al-r1-a1",
+                "name": "DPD follow-up and field recovery",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Collections Agent",
+                    "system": "Collections CRM",
+                    "info": "Outbound IVR + tele for 1-30 DPD; field visit for 31-60 DPD; recovery agent for higher buckets"
+                  }
+                ]
+              },
+              {
+                "id": "al-r1-a2",
+                "name": "Vehicle repossession",
+                "assignments": [
+                  {
+                    "unitId": "recovery",
+                    "person": "Recovery Officer",
+                    "system": "NPA MIS",
+                    "info": "Initiate repossession per SARFAESI or sec 9 CPC; liaise with RC holder; auction repossessed vehicle"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "al-rn1",
+            "name": "Closure and Hypothecation Release",
+            "activities": [
+              {
+                "id": "al-rn1-a1",
+                "name": "NOC and hypothecation termination",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Ops Officer",
+                    "system": "Finacle CBS + Vahan",
+                    "info": "Issue NOC on full payment; file Form 35 (HP termination) with RTO via Vahan/Parivahan; update CBS"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "education-loans",
+      "name": "Education Loans",
+      "stages": {
+        "lead": [
+          {
+            "id": "el-l1",
+            "name": "Institutional and Government Scheme Leads",
+            "activities": [
+              {
+                "id": "el-l1-a1",
+                "name": "College and university campus leads",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Sales Officer",
+                    "system": "SBI CRM",
+                    "info": "Campus tie-ups with IITs, NITs, AIIMS, top management institutes; admission season outreach"
+                  }
+                ]
+              },
+              {
+                "id": "el-l1-a2",
+                "name": "Vidya Lakshmi Portal integration",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "Vidya Lakshmi Portal",
+                    "info": "Receive and process student loan applications routed from Govt. Vidya Lakshmi portal (DoHE)"
+                  }
+                ]
+              },
+              {
+                "id": "el-l1-a3",
+                "name": "International education loan campaign",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Manager",
+                    "system": "SBI CRM",
+                    "info": "Target GRE / GMAT / IELTS takers for SBI Global ED-VANTAGE for overseas education loans"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "el-o1",
+            "name": "Application Intake",
+            "activities": [
+              {
+                "id": "el-o1-a1",
+                "name": "SBI Scholar / Student Loan application",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Customer Service Rep",
+                    "system": "LOS",
+                    "info": "Collect application for student + co-applicant (parent/guardian); admission letter; fee structure"
+                  }
+                ]
+              },
+              {
+                "id": "el-o1-a2",
+                "name": "Global ED-VANTAGE application (overseas)",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Education Loan Officer",
+                    "system": "LOS",
+                    "info": "Application for overseas universities; I-20 / CAS / offer letter; cost of study estimate; forex planning"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "el-a1",
+            "name": "Credit and Eligibility Assessment",
+            "activities": [
+              {
+                "id": "el-a1-a1",
+                "name": "Co-applicant income and bureau check",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS + CIBIL",
+                    "info": "Assess parent/guardian income; CIBIL check; verify repayment capacity post moratorium"
+                  }
+                ]
+              },
+              {
+                "id": "el-a1-a2",
+                "name": "Course and institution eligibility verification",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS",
+                    "info": "Verify institution on approved list; course duration; graduate employment prospects; fee structure"
+                  }
+                ]
+              },
+              {
+                "id": "el-a1-a3",
+                "name": "Collateral assessment for loans above Rs 7.5L",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Legal Officer",
+                    "system": "Legal MIS",
+                    "info": "Collateral required for loans >₹7.5L (property / FD) unless covered under CGFSEL; title check"
+                  }
+                ]
+              },
+              {
+                "id": "el-a1-a4",
+                "name": "CGFSEL coverage check",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "NCGTC Portal",
+                    "info": "Check CGFSEL coverage for collateral-free loans up to ₹7.5L; fee-based guarantee from NCGTC"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "el-f1",
+            "name": "Sanction and Disbursement",
+            "activities": [
+              {
+                "id": "el-f1-a1",
+                "name": "Moratorium-linked sanction setup",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Maker",
+                    "system": "LOS",
+                    "info": "Sanction with moratorium = course duration + 1 year; simple interest accrual during moratorium"
+                  }
+                ]
+              },
+              {
+                "id": "el-f1-a2",
+                "name": "Semester-wise fee disbursal to institution",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Disbursement Ops",
+                    "system": "Finacle CBS",
+                    "info": "Direct NEFT/RTGS payment to institution per semester; student living expense credit to student account"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "el-s1",
+            "name": "Moratorium and Repayment Management",
+            "activities": [
+              {
+                "id": "el-s1-a1",
+                "name": "Moratorium tracking and EMI switch",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Staff",
+                    "system": "Finacle CBS",
+                    "info": "Track moratorium end date; capitalise interest; switch account to EMI repayment mode; notify borrower"
+                  }
+                ]
+              },
+              {
+                "id": "el-s1-a2",
+                "name": "Interest subvention claim (Govt. scheme)",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Subsidy Ops",
+                    "system": "Canserv / DoHE Portal",
+                    "info": "Claim interest subvention for EWS students under Central scheme during moratorium from MoE"
+                  }
+                ]
+              },
+              {
+                "id": "el-s1-a3",
+                "name": "Repayment restructure for unemployed borrowers",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Education Loan Officer",
+                    "system": "LOS",
+                    "info": "Offer extended moratorium or restructure if student unable to secure employment post-graduation"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "el-r1",
+            "name": "Post-moratorium Monitoring and Recovery",
+            "activities": [
+              {
+                "id": "el-r1-a1",
+                "name": "Delinquency tracking post moratorium",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Portfolio Analyst",
+                    "system": "EWS Dashboard",
+                    "info": "Cohort-wise vintage tracking of repayment post moratorium; identify at-risk accounts early"
+                  }
+                ]
+              },
+              {
+                "id": "el-r1-a2",
+                "name": "Contact tracing and collection",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Collections Agent",
+                    "system": "Collections CRM",
+                    "info": "Reach student and co-applicant via multiple channels; validate employment status; arrange repayment plan"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "el-rn1",
+            "name": "Closure",
+            "activities": [
+              {
+                "id": "el-rn1-a1",
+                "name": "Loan closure and NOC issuance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Ops Officer",
+                    "system": "Finacle CBS",
+                    "info": "Issue NOC on full repayment; release collateral if any; release co-applicant from guarantee; CIBIL update"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "credit-cards",
+      "name": "Credit Cards",
+      "stages": {
+        "lead": [
+          {
+            "id": "cc-l1",
+            "name": "Targeted Acquisition",
+            "activities": [
+              {
+                "id": "cc-l1-a1",
+                "name": "CBS-based pre-approved card push",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / Offer Engine",
+                    "info": "Push SBI Card offers to eligible salary, FD, and home loan customers; variant matched to spend profile"
+                  }
+                ]
+              },
+              {
+                "id": "cc-l1-a2",
+                "name": "Branch and POS cross-sell",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "SBI CRM",
+                    "info": "Cross-sell SBI Card at account opening, loan disbursal, and FD booking; DSA channel supplement"
+                  }
+                ]
+              },
+              {
+                "id": "cc-l1-a3",
+                "name": "Co-branded card partnership campaigns",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "SBI Card App / Partner Portals",
+                    "info": "Promote IRCTC SBI Card, Air India SBI Card, Amazon SBI Card; partner-sourced lead funnels"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "cc-o1",
+            "name": "Application",
+            "activities": [
+              {
+                "id": "cc-o1-a1",
+                "name": "Digital STP application (YONO / SBI Card App)",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / SBI Card App",
+                    "info": "Aadhaar e-KYC; instant virtual card for pre-approved; full STP including limit assignment and card dispatch"
+                  }
+                ]
+              },
+              {
+                "id": "cc-o1-a2",
+                "name": "Physical application via branch or DSA",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Sales Officer / DSA",
+                    "system": "SBI Card LOS",
+                    "info": "Paper or tablet-based application; income doc and KYC collection; login to SBI Card processing"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "cc-a1",
+            "name": "Credit Assessment and Limit Setting",
+            "activities": [
+              {
+                "id": "cc-a1-a1",
+                "name": "Bureau score and income-based policy check",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "SBI Card LOS + CIBIL",
+                    "info": "Bureau pull; minimum score threshold; income-based limit grid; DPD/write-off history check"
+                  }
+                ]
+              },
+              {
+                "id": "cc-a1-a2",
+                "name": "Internal negative list and blacklist check",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Compliance Analyst",
+                    "system": "Negative List DB",
+                    "info": "Check against SBI internal defaulter list, CIBIL suit-filed list, SEBI debarred list"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "cc-f1",
+            "name": "Card Issuance",
+            "activities": [
+              {
+                "id": "cc-f1-a1",
+                "name": "Physical card personalisation and dispatch",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Card Ops",
+                    "system": "Card Management System (CMS)",
+                    "info": "Card embossing; green PIN setting; dispatch via registered post within 7 working days; tracking SMS"
+                  }
+                ]
+              },
+              {
+                "id": "cc-f1-a2",
+                "name": "Virtual card instant activation",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "SBI Card App",
+                    "info": "Instant virtual card number for pre-approved; tokenisation via Visa/MC network; ready for online use"
+                  }
+                ]
+              },
+              {
+                "id": "cc-f1-a3",
+                "name": "Welcome benefit and add-on card setup",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Card Ops",
+                    "system": "CMS",
+                    "info": "Credit welcome benefit; set up add-on cards for family members if requested; register for e-statements"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "cc-s1",
+            "name": "Billing and Payment",
+            "activities": [
+              {
+                "id": "cc-s1-a1",
+                "name": "Monthly statement generation and delivery",
+                "assignments": [
+                  {
+                    "unitId": "liabilities",
+                    "person": "Ops Staff",
+                    "system": "CMS",
+                    "info": "Generate monthly statement on billing date; deliver via email and YONO; paper statement on request"
+                  }
+                ]
+              },
+              {
+                "id": "cc-s1-a2",
+                "name": "Minimum due and full payment",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / BBPS / UPI",
+                    "info": "Payment via YONO auto-debit, BBPS biller, UPI collect, NEFT; real-time credit to card account"
+                  }
+                ]
+              },
+              {
+                "id": "cc-s1-a3",
+                "name": "Reward points redemption",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "SBI Card App / Rewards Portal",
+                    "info": "Redeem reward points against statement credit, merchandise, or cashback via SBI Card rewards portal"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "cc-s2",
+            "name": "Card and Account Services",
+            "activities": [
+              {
+                "id": "cc-s2-a1",
+                "name": "Credit limit enhancement",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Manager",
+                    "system": "CMS",
+                    "info": "Bureau review + spend and payment behaviour; approve permanent or temporary limit enhancement"
+                  }
+                ]
+              },
+              {
+                "id": "cc-s2-a2",
+                "name": "Card hotlisting and replacement",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Service Agent",
+                    "system": "CMS",
+                    "info": "Instant card block on loss/theft via IVR or agent; dispatch replacement card; waive charges if fraud"
+                  }
+                ]
+              },
+              {
+                "id": "cc-s2-a3",
+                "name": "EMI conversion on transactions",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "SBI Card App",
+                    "info": "Convert eligible transactions ≥₹2,500 to EMI at point of sale or post-purchase via app"
+                  }
+                ]
+              },
+              {
+                "id": "cc-s2-a4",
+                "name": "International usage enable / disable",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "SBI Card App / INB",
+                    "info": "Toggle international POS / ATM / online usage; set international transaction limit via self-service"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "cc-r1",
+            "name": "Fraud and Delinquency Management",
+            "activities": [
+              {
+                "id": "cc-r1-a1",
+                "name": "Real-time transaction fraud scoring",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "Fraud Analyst",
+                    "system": "Fraud Management System (FICO Falcon)",
+                    "info": "ML-based real-time fraud scoring per transaction; block on anomaly; customer OTP verification for suspicious TXN"
+                  }
+                ]
+              },
+              {
+                "id": "cc-r1-a2",
+                "name": "Chargeback and dispute management",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Dispute Ops Agent",
+                    "system": "Visa / MC Dispute Portal",
+                    "info": "Log cardholder dispute; initiate chargeback via Visa/Mastercard; merchant retrieval; provisional credit"
+                  }
+                ]
+              },
+              {
+                "id": "cc-r1-a3",
+                "name": "Collections for overdue accounts",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Collections Agent",
+                    "system": "Collections CRM",
+                    "info": "SMS + IVR + tele-call for overdue; minimum due reminder; escalation to legal for 180+ DPD"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "cc-rn1",
+            "name": "Renewal and Upgrade",
+            "activities": [
+              {
+                "id": "cc-rn1-a1",
+                "name": "Annual card renewal",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Card Ops",
+                    "system": "CMS",
+                    "info": "Auto-renew card 60 days before expiry; dispatch new card with updated expiry; maintain continuity"
+                  }
+                ]
+              },
+              {
+                "id": "cc-rn1-a2",
+                "name": "Card upgrade or downgrade",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Retention Agent",
+                    "system": "Service CRM",
+                    "info": "Offer upgrade on spend milestone (e.g., SimplyCLICK to PRIME); downgrade on customer request to waive fee"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "cc-rn2",
+            "name": "Card Cancellation",
+            "activities": [
+              {
+                "id": "cc-rn2-a1",
+                "name": "Card closure and outstanding settlement",
+                "assignments": [
+                  {
+                    "unitId": "contact",
+                    "person": "Retention Agent",
+                    "system": "CMS",
+                    "info": "Confirm zero outstanding; deactivate card; apply retention offer if eligible; issue closure confirmation"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "nri-banking",
+      "name": "NRI Banking",
+      "stages": {
+        "lead": [
+          {
+            "id": "nri-l1",
+            "name": "Diaspora Targeting",
+            "activities": [
+              {
+                "id": "nri-l1-a1",
+                "name": "NRI helpdesk and overseas branch referrals",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "NRI Portal / YONO",
+                    "info": "NRI-specific dedicated landing page; 24x7 NRI helpdesk in UK, US, Singapore, Gulf, Canada"
+                  }
+                ]
+              },
+              {
+                "id": "nri-l1-a2",
+                "name": "Referral from resident relatives",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "NRI Desk Officer",
+                    "system": "SBI CRM",
+                    "info": "Capture referrals from resident family for NRE/NRO/FCNR accounts; coordinate POA documentation"
+                  }
+                ]
+              },
+              {
+                "id": "nri-l1-a3",
+                "name": "Remittance-to-savings conversion",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / SWIFT Messaging",
+                    "info": "Convert inward remittance senders to NRI account holders; inbound SWIFT alert-triggered acquisition"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "nri-o1",
+            "name": "Account Opening",
+            "activities": [
+              {
+                "id": "nri-o1-a1",
+                "name": "NRE / NRO / FCNR account opening",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "NRI Desk Officer",
+                    "system": "Finacle CBS",
+                    "info": "Overseas address proof; valid passport; visa; FEMA declaration; foreign address on KYC; CIF creation"
+                  }
+                ]
+              },
+              {
+                "id": "nri-o1-a2",
+                "name": "Video KYC for NRI customers",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "KYC Analyst",
+                    "system": "VKYC Platform",
+                    "info": "Live VKYC per RBI DNBS/2020 circular; overseas ID verification; liveness check"
+                  }
+                ]
+              },
+              {
+                "id": "nri-o1-a3",
+                "name": "POA holder registration",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "NRI Desk Officer",
+                    "system": "Finacle CBS",
+                    "info": "Register resident Power of Attorney holder for operational transactions; execute notarised POA"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "nri-a1",
+            "name": "FEMA and Tax Residency Compliance",
+            "activities": [
+              {
+                "id": "nri-a1-a1",
+                "name": "FEMA residency classification",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Compliance Officer",
+                    "system": "Compliance MIS",
+                    "info": "Verify NRI/PIO/OCI status per FEMA 1999; assess repatriation eligibility for NRE vs NRO accounts"
+                  }
+                ]
+              },
+              {
+                "id": "nri-a1-a2",
+                "name": "FATCA and CRS self-certification",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "KYC Analyst",
+                    "system": "FATCA Portal / CBDT",
+                    "info": "Collect FATCA/CRS self-certification; identify US persons; report to CBDT under FATCA IGA"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "nri-f1",
+            "name": "Account Activation and Channel Setup",
+            "activities": [
+              {
+                "id": "nri-f1-a1",
+                "name": "SWIFT remittance channel linkage",
+                "assignments": [
+                  {
+                    "unitId": "treasury",
+                    "person": "Forex Ops",
+                    "system": "Finacle Treasury",
+                    "info": "Link NRE/NRO/FCNR account to SWIFT; set correspondent bank details; activate FIRC issuance"
+                  }
+                ]
+              },
+              {
+                "id": "nri-f1-a2",
+                "name": "International debit card and YONO NRI setup",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Issue international RuPay/Visa debit; activate NRI-specific YONO view; INB with forex transaction view"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "nri-s1",
+            "name": "Remittance and Transaction Services",
+            "activities": [
+              {
+                "id": "nri-s1-a1",
+                "name": "Inward remittance credit (SWIFT)",
+                "assignments": [
+                  {
+                    "unitId": "treasury",
+                    "person": "Forex Ops",
+                    "system": "Finacle Treasury / SWIFT",
+                    "info": "Receive and credit inward SWIFT remittances to NRE/NRO/FCNR; issue FIRC within 2 working days"
+                  }
+                ]
+              },
+              {
+                "id": "nri-s1-a2",
+                "name": "Outward remittance from NRO account",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "NRI Desk Officer",
+                    "system": "Finacle CBS + RBI FEM Returns",
+                    "info": "Process outward up to USD 1M per year for NRIs; collect Form 15CA and Form 15CB (CA certified)"
+                  }
+                ]
+              },
+              {
+                "id": "nri-s1-a3",
+                "name": "Forex conversion and rate service",
+                "assignments": [
+                  {
+                    "unitId": "treasury",
+                    "person": "Forex Ops",
+                    "system": "Finacle Treasury / FX Platform",
+                    "info": "Competitive forex rates for NRI remittances; forward booking for large value transfers; rate alerts"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "nri-s2",
+            "name": "NRI Investment and Advisory",
+            "activities": [
+              {
+                "id": "nri-s2-a1",
+                "name": "NRE and FCNR FD booking",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "YONO / INB",
+                    "info": "Book NRE savings/FD (repatriable, tax-free); NRO FD; FCNR(B) in USD/GBP/EUR/JPY/AUD/CAD"
+                  }
+                ]
+              },
+              {
+                "id": "nri-s2-a2",
+                "name": "PIS for equity and MF investment",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "NRI Desk Officer",
+                    "system": "Finacle CBS + NSE PIS",
+                    "info": "Portfolio Investment Scheme under RBI FEMA; PIS permission; link SBI demat via SBI Securities"
+                  }
+                ]
+              },
+              {
+                "id": "nri-s2-a3",
+                "name": "NRI home loan and property investment advisory",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "NRI Desk Officer",
+                    "system": "LOS",
+                    "info": "Advise on FEMA-compliant property purchase in India; NRI home loan facilitation; POA-based processing"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "nri-r1",
+            "name": "FEMA Compliance and AML",
+            "activities": [
+              {
+                "id": "nri-r1-a1",
+                "name": "FEMA contravention monitoring",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Compliance Officer",
+                    "system": "Compliance MIS",
+                    "info": "Monitor repatriation limits; flag excess repatriation; file compounding applications to RBI for inadvertent breaches"
+                  }
+                ]
+              },
+              {
+                "id": "nri-r1-a2",
+                "name": "Enhanced due diligence for NRI accounts",
+                "assignments": [
+                  {
+                    "unitId": "kyc",
+                    "person": "AML Analyst",
+                    "system": "AML Monitoring System",
+                    "info": "EDD for NRI accounts; PEP screening; CTF monitoring; FATF high-risk jurisdiction flags; SAR to FIU-IND"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "nri-rn1",
+            "name": "Residential Status Change",
+            "activities": [
+              {
+                "id": "nri-rn1-a1",
+                "name": "NRE/NRO re-designation to resident account",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "NRI Desk Officer",
+                    "system": "Finacle CBS",
+                    "info": "On customer's return to India: convert NRE/NRO to resident SB/RFC; FCNR(B) held to maturity per RBI"
+                  }
+                ]
+              },
+              {
+                "id": "nri-rn1-a2",
+                "name": "Account succession on demise of NRI",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Branch Manager",
+                    "system": "Finacle CBS + Legal MIS",
+                    "info": "Process nominee or legal heir claim; verify overseas probate if applicable; remit balance per FEMA"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "msme-loans",
+      "name": "MSME / SME Loans",
+      "stages": {
+        "lead": [
+          {
+            "id": "msme-l1",
+            "name": "Cluster and Scheme-Based Sourcing",
+            "activities": [
+              {
+                "id": "msme-l1-a1",
+                "name": "Industrial cluster visits",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "SME Relationship Manager",
+                    "system": "SBI CRM",
+                    "info": "Identify units in notified clusters (Ludhiana hosiery, Tirupur garments, Surat diamond, Pune auto ancillary)"
+                  }
+                ]
+              },
+              {
+                "id": "msme-l1-a2",
+                "name": "Mudra and CGTMSE scheme outreach",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Relationship Officer",
+                    "system": "MUDRA Portal / CGTMSE",
+                    "info": "Source Mudra Shishu (≤50K), Kishor (50K-5L), Tarun (5L-10L); CGTMSE for collateral-free SME cases"
+                  }
+                ]
+              },
+              {
+                "id": "msme-l1-a3",
+                "name": "GST and trade data-driven prospecting",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "GST Analytics / GSTN",
+                    "info": "Identify high-turnover GST filers without SBI credit exposure; OCEN-based embedded finance leads"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "msme-o1",
+            "name": "Application and Document Collection",
+            "activities": [
+              {
+                "id": "msme-o1-a1",
+                "name": "Business loan application",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "SME Officer",
+                    "system": "LOS (LoanSeva)",
+                    "info": "Collect application: business KYC (GST cert, Udyam, MoA/AoA), 3-yr ITR, GST returns, bank statements, stock"
+                  }
+                ]
+              },
+              {
+                "id": "msme-o1-a2",
+                "name": "Udyam registration and KYC verification",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Staff",
+                    "system": "Udyam Portal",
+                    "info": "Verify Udyam registration; confirm MSME classification (Micro/Small/Medium); GST and PAN linkage"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "msme-a1",
+            "name": "Financial and Business Assessment",
+            "activities": [
+              {
+                "id": "msme-a1-a1",
+                "name": "Working capital and term loan sizing",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS",
+                    "info": "Nayak Committee / Turnover Method for WC; MPBF; projected balance sheet; DSCR for term loans"
+                  }
+                ]
+              },
+              {
+                "id": "msme-a1-a2",
+                "name": "CIBIL MSME Rank and bureau check",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS + CIBIL",
+                    "info": "CIBIL MSME Rank (1-10); promoter personal bureau; GST revenue triangulation; banking behaviour"
+                  }
+                ]
+              },
+              {
+                "id": "msme-a1-a3",
+                "name": "Collateral and CGTMSE coverage assessment",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Legal Officer",
+                    "system": "Legal MIS",
+                    "info": "Commercial property valuation and title check; CGTMSE eligibility and fee for collateral-free coverage"
+                  }
+                ]
+              },
+              {
+                "id": "msme-a1-a4",
+                "name": "Field investigation and site visit",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Field Investigator",
+                    "system": "FI MIS",
+                    "info": "Physical verification of business premises, stock, machinery; confirm address and operations"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "msme-f1",
+            "name": "Limit Setup and Disbursal",
+            "activities": [
+              {
+                "id": "msme-f1-a1",
+                "name": "CC / OD / TL limit sanction",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Manager",
+                    "system": "LOS",
+                    "info": "Sanction cash credit / OD against property / term loan; CGTMSE fee payment; pricing per risk rating"
+                  }
+                ]
+              },
+              {
+                "id": "msme-f1-a2",
+                "name": "Account activation and charge creation",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Ops Officer",
+                    "system": "Finacle CBS",
+                    "info": "Open CC/OD/TL account in CBS; charge creation on collateral; CERSAI filing; drawing power setup"
+                  }
+                ]
+              },
+              {
+                "id": "msme-f1-a3",
+                "name": "Mudra card issuance (where applicable)",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Ops Officer",
+                    "system": "Finacle CBS + RuPay",
+                    "info": "Issue Mudra RuPay debit card for eligible Kishore/Tarun borrowers for operational withdrawals"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "msme-s1",
+            "name": "Working Capital and Trade Finance",
+            "activities": [
+              {
+                "id": "msme-s1-a1",
+                "name": "Drawing power review and stock statement",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "SME Officer",
+                    "system": "Finacle CBS",
+                    "info": "Monthly stock + debtors statement; recompute DP; adjust CC limit utilisation accordingly"
+                  }
+                ]
+              },
+              {
+                "id": "msme-s1-a2",
+                "name": "Letter of Credit and Bank Guarantee issuance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Trade Finance Officer",
+                    "system": "Finacle Trade Finance",
+                    "info": "Issue inland / foreign LC; performance / financial BG; e-BG through NeSL platform"
+                  }
+                ]
+              },
+              {
+                "id": "msme-s1-a3",
+                "name": "Invoice discounting and bill finance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "SME Officer",
+                    "system": "TReDS / Finacle",
+                    "info": "Discounting of trade receivables via TReDS platform (M1Xchange, RXIL, Invoicemart); bill purchase"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "msme-r1",
+            "name": "Account and Portfolio Monitoring",
+            "activities": [
+              {
+                "id": "msme-r1-a1",
+                "name": "CC / OD account conduct and SMA watch",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Risk Manager",
+                    "system": "EWS Dashboard",
+                    "info": "Monitor CC/OD irregularity (out of order >90 days = NPA); SMA-0 tagging; stock audit trigger on irregularity"
+                  }
+                ]
+              },
+              {
+                "id": "msme-r1-a2",
+                "name": "Stock audit and inspection",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Portfolio Analyst",
+                    "system": "Collateral Tracker",
+                    "info": "Annual stock audit via empanelled CA firm; surprise inspection for accounts showing EWS triggers"
+                  }
+                ]
+              },
+              {
+                "id": "msme-r1-a3",
+                "name": "CGTMSE guarantee claim filing",
+                "assignments": [
+                  {
+                    "unitId": "recovery",
+                    "person": "Recovery Officer",
+                    "system": "CGTMSE Portal (NCGTC)",
+                    "info": "File CGTMSE guarantee claim for eligible NPA accounts; submit within claim period; follow up on payout"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "msme-rn1",
+            "name": "Annual Renewal and Enhancement",
+            "activities": [
+              {
+                "id": "msme-rn1-a1",
+                "name": "Annual credit review of CC / OD limits",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "SME Officer",
+                    "system": "LOS",
+                    "info": "Annual review: fresh financials, updated bureau, GST returns, DP reset; limit enhancement or reduction"
+                  }
+                ]
+              },
+              {
+                "id": "msme-rn1-a2",
+                "name": "Collateral revaluation",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Empanelled Valuer",
+                    "system": "Collateral Tracker",
+                    "info": "Revalue collateral every 3 years or on material market movement; update LTV; flag shortfall"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "agricultural-loans",
+      "name": "Agricultural Loans",
+      "stages": {
+        "lead": [
+          {
+            "id": "agr-l1",
+            "name": "Government Scheme and Village Outreach",
+            "activities": [
+              {
+                "id": "agr-l1-a1",
+                "name": "Kisan Credit Card (KCC) camp",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Agricultural Officer",
+                    "system": "KCC Portal / Finacle",
+                    "info": "Organise KCC camps at gram panchayat; screen farmers on land holding and crop history; issue KCC"
+                  }
+                ]
+              },
+              {
+                "id": "agr-l1-a2",
+                "name": "PM-KISAN database targeting",
+                "assignments": [
+                  {
+                    "unitId": "digital",
+                    "person": "",
+                    "system": "PM-KISAN / DBT Portal",
+                    "info": "Cross-reference PM-KISAN beneficiary database for KCC and agri loan targeting; priority sector compliance"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "agr-o1",
+            "name": "Application and Documentation",
+            "activities": [
+              {
+                "id": "agr-o1-a1",
+                "name": "KCC / agri loan application",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Agricultural Officer",
+                    "system": "LOS",
+                    "info": "Collect land records (7/12 extract, jamabandi), crop details, khasra-khatauni; KYC of farmer"
+                  }
+                ]
+              },
+              {
+                "id": "agr-o1-a2",
+                "name": "Revenue record and land ownership verification",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Field Officer",
+                    "system": "State Revenue Portal (Bhulekh)",
+                    "info": "Online land record verification via state Bhulekh / DigiLocker; encumbrance and mutation check"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "agr-a1",
+            "name": "Credit and Land Assessment",
+            "activities": [
+              {
+                "id": "agr-a1-a1",
+                "name": "Scale of finance and crop-based limit",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Agricultural Credit Analyst",
+                    "system": "LOS",
+                    "info": "Apply district-level Scale of Finance (DLTC-approved); limit = area × SoF per crop; crop insurance linkage"
+                  }
+                ]
+              },
+              {
+                "id": "agr-a1-a2",
+                "name": "Land valuation and charge creation feasibility",
+                "assignments": [
+                  {
+                    "unitId": "legal",
+                    "person": "Legal Officer",
+                    "system": "Legal MIS",
+                    "info": "Assess land for mortgage (where applicable); check for fragmented holdings; state-specific tenancy laws"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "agr-f1",
+            "name": "Sanction and Kisan Credit Card Activation",
+            "activities": [
+              {
+                "id": "agr-f1-a1",
+                "name": "KCC limit sanction and RuPay card issuance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Agricultural Officer",
+                    "system": "Finacle CBS + RuPay",
+                    "info": "Sanction crop loan + allied activity limit; issue KCC RuPay debit card; ATM/PoS access; annual renewal"
+                  }
+                ]
+              },
+              {
+                "id": "agr-f1-a2",
+                "name": "PM Fasal Bima Yojana (PMFBY) crop insurance linkage",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Agricultural Officer",
+                    "system": "PMFBY Portal / AIC",
+                    "info": "Mandatory PMFBY crop insurance for KCC holders; premium debit from KCC account; coverage upload"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "agr-s1",
+            "name": "Seasonal Drawdown and Repayment",
+            "activities": [
+              {
+                "id": "agr-s1-a1",
+                "name": "Crop season drawdown",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Teller",
+                    "system": "Finacle CBS",
+                    "info": "Enable drawdown at Kharif/Rabi season start; cash withdrawal at branch or KCC ATM/PoS"
+                  }
+                ]
+              },
+              {
+                "id": "agr-s1-a2",
+                "name": "Harvest-linked repayment",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Agricultural Officer",
+                    "system": "Finacle CBS",
+                    "info": "Repayment aligned with crop harvest cycle; interest subvention if repaid promptly (3% GoI + 2% SBI)"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "agr-r1",
+            "name": "Agricultural Portfolio Risk",
+            "activities": [
+              {
+                "id": "agr-r1-a1",
+                "name": "Crop failure and drought monitoring",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Risk Manager",
+                    "system": "EWS Dashboard / IMD",
+                    "info": "Monitor IMD drought/flood alerts; flag districts with crop failure for moratorium / restructure"
+                  }
+                ]
+              },
+              {
+                "id": "agr-r1-a2",
+                "name": "Priority sector and sub-target compliance",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Compliance Officer",
+                    "system": "NABARD / RBI Returns",
+                    "info": "Track PSL achievement vs 18% agri target; 8% small and marginal farmer sub-target; ANBC reporting"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "agr-rn1",
+            "name": "Annual KCC Renewal",
+            "activities": [
+              {
+                "id": "agr-rn1-a1",
+                "name": "KCC annual review and limit reset",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Agricultural Officer",
+                    "system": "Finacle CBS",
+                    "info": "Annual review of KCC: fresh crop plan, land holding unchanged, repayment track; reset credit limit"
+                  }
+                ]
+              },
+              {
+                "id": "agr-rn1-a2",
+                "name": "Interest subvention claim",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Subsidy Ops",
+                    "system": "NABARD / GoI Portal",
+                    "info": "Submit interest subvention claim to NABARD (2%) and GoI (3% prompt repayment bonus); quarterly reconciliation"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "govt-sponsored",
+      "name": "Govt Sponsored and Priority Sector",
+      "stages": {
+        "lead": [
+          {
+            "id": "gs-l1",
+            "name": "Scheme-Based Lead Sourcing",
+            "activities": [
+              {
+                "id": "gs-l1-a1",
+                "name": "PM SVANidhi (street vendor) camp",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Lead Manager",
+                    "system": "PM SVANidhi Portal",
+                    "info": "Identify registered street vendors via ULB; organise loan mela; micro-credit ₹10,000–₹50,000"
+                  }
+                ]
+              },
+              {
+                "id": "gs-l1-a2",
+                "name": "PMEGP and Stand-Up India sourcing",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Lead Manager",
+                    "system": "KVIC PMEGP Portal / StandUpMitra",
+                    "info": "PMEGP leads via KVIC/KVIB/DIC; Stand-Up India for SC/ST/women entrepreneurs"
+                  }
+                ]
+              },
+              {
+                "id": "gs-l1-a3",
+                "name": "SHG and JLG micro-credit outreach",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "BC Agent / Agricultural Officer",
+                    "system": "SHG-Bank Linkage Portal",
+                    "info": "SHG federation sourcing via NABARD/NRLM; JLG for tenant farmers; doorstep linkage"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "origination": [
+          {
+            "id": "gs-o1",
+            "name": "Application Intake",
+            "activities": [
+              {
+                "id": "gs-o1-a1",
+                "name": "Scheme-specific application and grading",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Lead Manager",
+                    "system": "Scheme Portal / LOS",
+                    "info": "Collect scheme-specific forms; SHG grading (Grade A/B for linkage); DSCR for PMEGP project loans"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "assessment": [
+          {
+            "id": "gs-a1",
+            "name": "Project and Beneficiary Assessment",
+            "activities": [
+              {
+                "id": "gs-a1-a1",
+                "name": "Project viability and DPR review",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Credit Analyst",
+                    "system": "LOS",
+                    "info": "Review Detailed Project Report (DPR); assess project viability; PMEGP subsidy claim quantum; ROI check"
+                  }
+                ]
+              },
+              {
+                "id": "gs-a1-a2",
+                "name": "Caste and category eligibility verification",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Lead Manager",
+                    "system": "LOS",
+                    "info": "Verify SC/ST/OBC/women/minority category certificates for Stand-Up India, PMEGP preferential allocation"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fulfillment": [
+          {
+            "id": "gs-f1",
+            "name": "Sanction and Subsidy Linkage",
+            "activities": [
+              {
+                "id": "gs-f1-a1",
+                "name": "Loan sanction and subsidy hold",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Ops Maker",
+                    "system": "LOS + CBS",
+                    "info": "Sanction loan; retain GoI / state subsidy in blocked account; release on asset creation confirmation"
+                  }
+                ]
+              },
+              {
+                "id": "gs-f1-a2",
+                "name": "Disbursal and subsidy claim",
+                "assignments": [
+                  {
+                    "unitId": "cpc",
+                    "person": "Disbursement Ops",
+                    "system": "Finacle CBS + Scheme Portal",
+                    "info": "Disburse project loan; file subsidy claim with KVIC / PMEGP implementing agency; track acknowledgement"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "service": [
+          {
+            "id": "gs-s1",
+            "name": "Repayment and Subsidy Adjustment",
+            "activities": [
+              {
+                "id": "gs-s1-a1",
+                "name": "Subsidy adjustment on repayment",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Lead Manager",
+                    "system": "Finacle CBS",
+                    "info": "Credit GoI/state subsidy to loan account after lock-in; revise outstanding; update repayment schedule"
+                  }
+                ]
+              },
+              {
+                "id": "gs-s1-a2",
+                "name": "SHG account operation and passbook maintenance",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "BC Agent",
+                    "system": "Finacle CBS",
+                    "info": "SHG group account operations; savings passbook update; loan tranche drawdown by group secretary"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "risk": [
+          {
+            "id": "gs-r1",
+            "name": "PSL Compliance and Monitoring",
+            "activities": [
+              {
+                "id": "gs-r1-a1",
+                "name": "Priority sector achievement tracking",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Compliance Officer",
+                    "system": "RBI CRILC / PSL Returns",
+                    "info": "Monthly PSL sub-target tracking (agri, weaker sections, micro, SF/MF); RIDF shortfall computation"
+                  }
+                ]
+              },
+              {
+                "id": "gs-r1-a2",
+                "name": "Subsidy misuse and diversion monitoring",
+                "assignments": [
+                  {
+                    "unitId": "rbo",
+                    "person": "Risk Manager",
+                    "system": "EWS Dashboard",
+                    "info": "Physical verification of project assets created; flag diversion; coordinate recovery with implementing agency"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "renewal": [
+          {
+            "id": "gs-rn1",
+            "name": "Scheme Exit and Closure",
+            "activities": [
+              {
+                "id": "gs-rn1-a1",
+                "name": "Loan closure and subsidy lock-in completion",
+                "assignments": [
+                  {
+                    "unitId": "branch",
+                    "person": "Lead Manager",
+                    "system": "Finacle CBS",
+                    "info": "Issue closure certificate; confirm lock-in compliance; report to implementing agency; update PSL records"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     }
   ]

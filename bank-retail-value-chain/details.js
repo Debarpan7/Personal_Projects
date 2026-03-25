@@ -10,7 +10,13 @@ const flowCanvas = document.getElementById("flowCanvas");
 const activeFilterInfo = document.getElementById("activeFilterInfo");
 const activityToolbar = document.getElementById("activityToolbar");
 
-let config = loadConfig();
+let config = null;
+
+
+async function bootstrap() {
+  config = await loadPreferredConfig();
+  renderFlow();
+}
 
 function unitLabel(id) {
   return config.units.find((u) => u.id === id)?.label || id;
@@ -162,4 +168,4 @@ function renderFlow() {
   flowCanvas.appendChild(track);
 }
 
-renderFlow();
+bootstrap();

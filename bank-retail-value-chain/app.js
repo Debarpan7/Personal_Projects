@@ -11,7 +11,7 @@ const statusLine = document.getElementById("statusLine");
 
 let selectedUnit = null;
 let editMode = false;
-let config = loadConfig();
+let config = null;
 
 function unitLabel(id) {
   return config.units.find((u) => u.id === id)?.label || id;
@@ -68,12 +68,7 @@ function renderMatrix() {
         })
         .join("");
 
-      td.innerHTML = `${l2Html}${
-        editMode
-          ? `<button class="mini-btn" data-add-l2="${lob.id}|${stage.id}">+ L2</button>`
-          : ""
-      }`;
-
+      td.innerHTML = `${l2Html}${editMode ? `<button class="mini-btn" data-add-l2="${lob.id}|${stage.id}">+ L2</button>` : ""}`;
       tr.appendChild(td);
     });
 
@@ -130,6 +125,11 @@ function render() {
   document.querySelectorAll(".chip").forEach((chip) => chip.classList.toggle("active", chip.dataset.unit === selectedUnit));
 }
 
+async function bootstrap() {
+  config = await loadPreferredConfig();
+  render();
+}
+
 editToggle.onclick = () => {
   editMode = !editMode;
   editToggle.textContent = editMode ? "Exit Edit Mode" : "Enter Edit Mode";
@@ -172,4 +172,4 @@ clearFilterBtn.onclick = () => {
   render();
 };
 
-render();
+bootstrap();

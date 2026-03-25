@@ -164,6 +164,20 @@ function uniqueUnitsForL2(l2) {
   return [...ids];
 }
 
+
+async function loadPreferredConfig(fileName = "value_chain.json") {
+  try {
+    const response = await fetch(fileName, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const parsed = await response.json();
+    const check = validateConfig(parsed);
+    if (!check.ok) throw new Error(check.error);
+    return ensureShape(parsed);
+  } catch {
+    return loadConfig();
+  }
+}
+
 function uid(prefix = "id") {
   return `${prefix}-${Math.random().toString(36).slice(2, 8)}`;
 }

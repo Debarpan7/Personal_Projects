@@ -1,4 +1,8 @@
 const STORAGE_KEY = "retail_value_chain_config_v2";
+<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
+const SOURCE_CHECK_KEY = "retail_value_chain_source_checked_v1";
+=======
+>>>>>>> main
 
 const DEFAULT_CONFIG = {
   units: [
@@ -166,14 +170,29 @@ function uniqueUnitsForL2(l2) {
 
 
 async function loadPreferredConfig(fileName = "value_chain.json") {
+<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
+  const alreadyChecked = localStorage.getItem(SOURCE_CHECK_KEY) === "1";
+  if (alreadyChecked) return loadConfig();
+
+=======
+>>>>>>> main
   try {
     const response = await fetch(fileName, { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const parsed = await response.json();
     const check = validateConfig(parsed);
     if (!check.ok) throw new Error(check.error);
+<<<<<<< codex/design-one-page-website-for-bank-services-mapping-0pvmkb
+
+    saveConfig(parsed);
+    localStorage.setItem(SOURCE_CHECK_KEY, "1");
     return ensureShape(parsed);
   } catch {
+    localStorage.setItem(SOURCE_CHECK_KEY, "1");
+=======
+    return ensureShape(parsed);
+  } catch {
+>>>>>>> main
     return loadConfig();
   }
 }

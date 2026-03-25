@@ -3,67 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SBI GenAI Command Center</title>
+    <title>SBI AI Strategy Atlas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Fraunces:opsz,wght,SOFT@9..144,300..700,80&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="noise"></div>
-    <header class="hero reveal">
-      <p class="eyebrow">State Bank of India · Strategic Storyline</p>
-      <h1>GenAI Margin Recovery <span>War-Room</span></h1>
-      <p class="subtitle">
-        A top-down, interactive blueprint from macro stress to execution layers, KPI pressure,
-        and agentic action themes.
-      </p>
-      <div class="hero-stats" id="macroTicker"></div>
+    <header class="topbar">
+      <div class="brand">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 5v14M5 12h14"/></svg>
+        <span>SBI AI STRATEGY ATLAS</span>
+      </div>
+      <nav>
+        <a href="index.html" class="active">Overview</a>
+        <a href="layers.html">Bank Stack</a>
+        <a href="dashboard.html">Data Dashboard</a>
+      </nav>
     </header>
 
-    <main>
-      <section class="panel reveal" id="macro">
-        <div class="panel-head">
-          <h2>1) Macro Forces → Banking Margin Pressure</h2>
-          <p>Click a macro factor to trace impact pathways into SBI's P&L and operations.</p>
-        </div>
-        <div class="macro-grid" id="macroGrid"></div>
-        <div class="impact-trace" id="impactTrace"></div>
+    <main class="container">
+      <section class="hero">
+        <p class="kicker">Palantir-inspired operating brief · minimal pastel UI</p>
+        <h1>Where SBI margin pressure starts—and where GenAI fixes it.</h1>
+        <p class="muted">Use the reveal buttons below to move from macro shocks to execution themes.</p>
       </section>
 
-      <section class="panel reveal" id="layers">
-        <div class="panel-head">
-          <h2>2) Banking Ecosystem Stack</h2>
-          <p>Toggle layers to reveal where GenAI unlocks speed, quality, and productivity.</p>
-        </div>
-        <div class="layer-strip" id="layerStrip"></div>
-        <div class="layer-details" id="layerDetails"></div>
+      <section class="button-row">
+        <button class="reveal-btn" data-target="macro">Reveal macro pressure map</button>
+        <button class="reveal-btn" data-target="kpi">Reveal KPI stress map</button>
+        <button class="reveal-btn" data-target="themes">Reveal AI action themes</button>
       </section>
 
-      <section class="panel reveal" id="stakeholders">
-        <div class="panel-head">
-          <h2>3) Org Structure, KPI Drivers, and AI Levers</h2>
-          <p>Select stakeholders to inspect KPIs, pressure points, and AI interventions.</p>
-        </div>
-        <div class="stakeholder-shell">
-          <aside id="stakeholderList" class="stakeholder-list"></aside>
-          <article id="stakeholderDetail" class="stakeholder-detail"></article>
+      <section id="macro" class="panel hidden">
+        <h2>Macro factors → impact on Indian banks</h2>
+        <div class="card-grid" id="macroCards"></div>
+      </section>
+
+      <section id="kpi" class="panel hidden">
+        <h2>Stakeholders, KPIs, and driver pressure</h2>
+        <div class="split">
+          <aside id="stakeholderTabs" class="tabs"></aside>
+          <article id="stakeholderView" class="panel-soft"></article>
         </div>
       </section>
 
-      <section class="panel reveal" id="themes">
-        <div class="panel-head">
-          <h2>4) Four Major AI Themes (Low-Hanging to Transformative)</h2>
-          <p>Expand each theme and use the maturity slider to switch from pilot to scale mode.</p>
+      <section id="themes" class="panel hidden">
+        <h2>4 AI themes (low-hanging → scaled)</h2>
+        <div class="inline-control">
+          <label for="mode">Execution mode</label>
+          <select id="mode">
+            <option value="pilot">Pilot</option>
+            <option value="accelerate">Accelerate</option>
+            <option value="scale">Scale</option>
+          </select>
         </div>
-        <div class="slider-wrap">
-          <label for="maturity">Implementation Maturity: <strong id="maturityLabel">Pilot</strong></label>
-          <input type="range" id="maturity" min="0" max="2" value="0" />
-        </div>
-        <div id="themeCards" class="theme-cards"></div>
+        <div id="themeGrid" class="card-grid"></div>
       </section>
     </main>
 

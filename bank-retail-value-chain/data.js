@@ -1,155 +1,139 @@
 window.storyData = {
-  macroTicker: [
-    { label: "Net Interest Margin", value: "↘ 15-25 bps risk" },
-    { label: "Cost-to-Income", value: "↗ under inflation + compliance" },
-    { label: "Digital Fraud Exposure", value: "↗ real-time response needed" },
-    { label: "Customer Switching", value: "↗ due to UX expectations" }
-  ],
-  macroFactors: [
+  macro: [
     {
-      name: "Rate-cycle volatility",
-      signal: "Deposit repricing faster than loan repricing",
-      effects: ["NIM compression", "ALM complexity", "Treasury decision latency"],
-      sbiStruggle: "Large CASA base helps, but granular repricing + branch-level nudges are slow."
+      icon: "📉",
+      title: "Rate-cycle whiplash",
+      pressure: "Deposit costs reprice faster than assets",
+      impact: "NIM compression, treasury hedging pressure"
     },
     {
-      name: "Regulatory and compliance intensity",
-      signal: "More disclosures, tighter monitoring, stricter model governance",
-      effects: ["Higher compliance FTE", "Manual control testing", "Audit burden"],
-      sbiStruggle: "Control evidence is fragmented across teams and systems."
+      icon: "🛡️",
+      title: "Compliance load",
+      pressure: "Higher surveillance and evidence requirements",
+      impact: "Rising cost-to-income via manual controls"
     },
     {
-      name: "Digital-native customer behavior",
-      signal: "Instant decisions, hyper-personalized offers, omnichannel continuity",
-      effects: ["Higher service expectations", "Drop-off in onboarding", "Cross-sell dilution"],
-      sbiStruggle: "Journeys still break between app, branch, and contact center."
+      icon: "📲",
+      title: "Digital expectation gap",
+      pressure: "Customers expect instant, contextual journeys",
+      impact: "Onboarding drop-off, cross-sell leakage"
     },
     {
-      name: "Fintech and platform competition",
-      signal: "Embedded finance + contextual journeys",
-      effects: ["Fee pressure", "Lending turnaround pressure", "API expectations"],
-      sbiStruggle: "Execution pace and partner orchestration at national scale."
-    }
-  ],
-  layers: [
-    {
-      name: "Ecosystem",
-      focus: "Partners, regulators, merchants, fintechs",
-      ai: "Agentic partner onboarding, smart SLA monitoring, policy-aware API assistants"
-    },
-    {
-      name: "Experience",
-      focus: "Customer journeys across app, branch, call center",
-      ai: "Conversational bankers, intent detection, proactive next-best-action"
-    },
-    {
-      name: "Front Office",
-      focus: "RM, branch sales, service advisors",
-      ai: "Copilots for relationship managers, assisted selling, multilingual support"
-    },
-    {
-      name: "Middle Office",
-      focus: "Risk, underwriting, fraud, operations control",
-      ai: "AI underwriting memo generation, anomaly triage, policy co-pilot"
-    },
-    {
-      name: "Back Office",
-      focus: "Processing, reconciliation, dispute management",
-      ai: "Document AI, straight-through processing boosters, exception copilots"
-    },
-    {
-      name: "Technology & Data",
-      focus: "Platform, data quality, model operations, architecture",
-      ai: "Synthetic data, code copilots, automated test + model drift sentinels"
-    },
-    {
-      name: "Support Functions",
-      focus: "HR, finance, legal, procurement, training",
-      ai: "Policy Q&A agents, finance close copilots, role-based learning assistants"
+      icon: "⚡",
+      title: "Fintech speed",
+      pressure: "Faster product cycles and embedded finance",
+      impact: "Fee pressure and slower response disadvantage"
     }
   ],
   stakeholders: [
     {
       role: "Retail Banking Head",
-      kpis: ["NIM", "Cost-to-income", "Cross-sell per customer"],
-      impactedBy: ["Rate-cycle volatility", "Digital-native customer behavior"],
-      drivers: ["Deposit mix", "Pricing agility", "Offer personalization"],
-      aiImpact: [
-        "GenAI pricing cockpit with branch-level scenario prompts",
-        "Next-best-offer engine grounded in customer context",
-        "Daily margin-at-risk narrative with action recommendations"
-      ]
+      kpis: ["NIM", "Cross-sell/customer", "Deposit retention"],
+      drivers: ["Pricing agility", "Journey completion", "Offer relevance"],
+      ai: ["RM copilot for retention", "NBO engine", "Margin-at-risk briefing agent"]
     },
     {
       role: "Chief Risk Officer",
-      kpis: ["Credit loss ratio", "Fraud loss", "Turnaround time"],
-      impactedBy: ["Regulatory and compliance intensity", "Fintech and platform competition"],
-      drivers: ["Risk policy adherence", "Underwriting quality", "Early warning alerts"],
-      aiImpact: [
-        "Agentic risk analyst generating explainable credit memos",
-        "Real-time fraud graph triage with human-in-loop escalation",
-        "Control testing assistant for audit-ready evidence trails"
-      ]
+      kpis: ["Credit loss ratio", "Fraud loss", "Policy breach rate"],
+      drivers: ["Underwriting quality", "Anomaly response", "Control traceability"],
+      ai: ["Credit memo generator", "Fraud triage graph agents", "Audit evidence copilot"]
     },
     {
       role: "Chief Operations Officer",
-      kpis: ["STP rate", "SLA compliance", "Unit processing cost"],
-      impactedBy: ["Regulatory and compliance intensity", "Digital-native customer behavior"],
-      drivers: ["Exception volume", "Manual touchpoints", "Workflow orchestration"],
-      aiImpact: [
-        "Email + document intake agents auto-classifying requests",
-        "Ops command center summarizing bottlenecks every hour",
-        "Exception-handling co-pilot with policy-linked resolutions"
-      ]
+      kpis: ["STP rate", "TAT", "Unit processing cost"],
+      drivers: ["Exception rates", "Manual work", "Case routing"],
+      ai: ["Doc intake automation", "Ops command center summaries", "Exception resolution copilot"]
     },
     {
-      role: "Chief Digital & Technology Officer",
-      kpis: ["App conversion", "Release velocity", "Platform reliability"],
-      impactedBy: ["Fintech and platform competition", "Digital-native customer behavior"],
-      drivers: ["Legacy modernization", "API latency", "Data readiness"],
-      aiImpact: [
-        "Developer co-pilot tuned to internal code patterns",
-        "AI QA agents for regression and journey break detection",
-        "Architecture co-pilot mapping technical debt to business risk"
-      ]
+      role: "CDTO",
+      kpis: ["Release velocity", "Conversion", "Platform reliability"],
+      drivers: ["Legacy modernization", "Data quality", "Test coverage"],
+      ai: ["Code copilot", "AI QA agents", "Architecture risk assistant"]
     }
   ],
   themes: [
     {
-      title: "Theme A: Intelligent Service Resolution",
-      why: "Cut service cost while lifting NPS through first-contact closure.",
-      plays: {
-        pilot: ["Deploy call summary + response drafting in contact center", "Enable multilingual branch assistant for 20 top intents"],
-        accelerate: ["Link assistant to CRM and ticket context with guardrails", "Introduce proactive issue prediction on high-value segments"],
-        scale: ["Run omni-channel agent mesh with branch + call center continuity", "Automate 35-45% routine queries with supervised autonomy"]
-      }
+      icon: "💬",
+      title: "Service resolution copilot",
+      why: "Reduce avoidable service cost and elevate CX",
+      pilot: ["Call summarization", "Branch assistant for top intents"],
+      accelerate: ["CRM-grounded response drafting", "Proactive issue prediction"],
+      scale: ["Omnichannel agent mesh", "40% routine query automation"]
     },
     {
-      title: "Theme B: AI-Augmented Credit Factory",
-      why: "Compress credit turnaround while improving risk consistency.",
-      plays: {
-        pilot: ["Auto-generate underwriting memo from submitted docs", "AI checklist for policy deviations"],
-        accelerate: ["Pre-sanction risk signals from bureau + cashflow patterns", "Credit committee brief in narrative + sensitivity scenarios"],
-        scale: ["Agentic underwriting orchestrator across retail + SME", "Continuous portfolio sentinel for early stress signatures"]
-      }
+      icon: "🧾",
+      title: "AI credit factory",
+      why: "Faster lending without policy drift",
+      pilot: ["Underwriting memo drafting", "Deviation checklist"],
+      accelerate: ["Pre-sanction risk markers", "Committee narrative packs"],
+      scale: ["Agentic underwriting orchestration", "Portfolio early stress sentinel"]
     },
     {
-      title: "Theme C: Margin Defense & Deposit Growth Copilot",
-      why: "Protect NIM with dynamic pricing and retention interventions.",
-      plays: {
-        pilot: ["Branch-level churn risk heatmap", "RM assistant for tailored retention scripts"],
-        accelerate: ["Customer-level deposit elasticity recommendations", "Treasury-retail decision room with daily narratives"],
-        scale: ["Autonomous alerting for margin-at-risk cohorts", "Closed-loop experimentation engine for pricing actions"]
-      }
+      icon: "🏦",
+      title: "Margin defense cockpit",
+      why: "Protect NIM and stabilize deposits",
+      pilot: ["Churn heatmaps", "RM retention scripts"],
+      accelerate: ["Elasticity recommendations", "Treasury-retail decision room"],
+      scale: ["Autonomous cohort alerts", "Closed-loop pricing experiments"]
     },
     {
-      title: "Theme D: Compliance + Control Co-Pilot",
-      why: "Reduce compliance burden without compromising rigor.",
-      plays: {
-        pilot: ["Policy Q&A bot for operations and branch teams", "Auto-extract control evidence from routine workflows"],
-        accelerate: ["Test-of-control recommendation assistant", "Regulatory change summarization with impacted process map"],
-        scale: ["Always-on compliance agent network across functions", "End-to-end audit pack generation with traceable lineage"]
-      }
+      icon: "✅",
+      title: "Compliance co-pilot",
+      why: "Lower compliance burden while improving rigor",
+      pilot: ["Policy Q&A", "Evidence extraction"],
+      accelerate: ["Control test recommendations", "Regulatory change maps"],
+      scale: ["Always-on compliance agents", "Auto audit pack generation"]
+    }
+  ],
+  stack: [
+    {
+      layer: "Ecosystem",
+      icon: "🌐",
+      issues: ["Partner onboarding lag", "SLA blind spots"],
+      kpiDamage: ["Lost fee income", "Delayed launch cycle"],
+      ai: ["Partner due-diligence agent", "SLA anomaly monitors"]
+    },
+    {
+      layer: "Experience",
+      icon: "🧭",
+      issues: ["Journey breaks across channels", "Low first-contact resolution"],
+      kpiDamage: ["NPS decline", "Drop in conversion"],
+      ai: ["Conversation intelligence", "Next-best-action recommendations"]
+    },
+    {
+      layer: "Front Office",
+      icon: "🤝",
+      issues: ["Manual advisory prep", "Inconsistent sales guidance"],
+      kpiDamage: ["Cross-sell leakage", "Longer cycle time"],
+      ai: ["RM copilots", "Contextual pitch assistants"]
+    },
+    {
+      layer: "Middle Office",
+      icon: "⚖️",
+      issues: ["Slow underwriting", "Reactive fraud review"],
+      kpiDamage: ["TAT slippage", "Higher fraud loss"],
+      ai: ["Policy-aware underwriting agents", "Fraud triage models"]
+    },
+    {
+      layer: "Back Office",
+      icon: "📚",
+      issues: ["Exception handling backlog", "Manual reconciliation"],
+      kpiDamage: ["High unit cost", "SLA misses"],
+      ai: ["Document AI", "Reconciliation copilots"]
+    },
+    {
+      layer: "Technology & Data",
+      icon: "🧱",
+      issues: ["Fragmented data context", "Release bottlenecks"],
+      kpiDamage: ["Model underperformance", "Slow product iteration"],
+      ai: ["Data quality agents", "AI test automation"]
+    },
+    {
+      layer: "Support Functions",
+      icon: "🧩",
+      issues: ["Slow policy interpretation", "Training friction"],
+      kpiDamage: ["Control errors", "Long onboarding"],
+      ai: ["Enterprise knowledge assistant", "Role-based learning copilots"]
     }
   ]
 };

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBI Bank Stack Visual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5v14M5 12h14"/></svg><span>SBI AI STRATEGY ATLAS</span></div>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="layers.html" class="active">Bank Stack</a>
+        <a href="dashboard.html">Data Dashboard</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="panel">
+        <h1>Banking ecosystem stack (visual operating model)</h1>
+        <p class="muted">Click each layer to see pain points, KPI damage, and AI interventions.</p>
+      </section>
+      <section class="stack-wrap">
+        <div id="stack" class="stack"></div>
+        <div id="stackDetail" class="panel-soft"></div>
+      </section>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="layers.js"></script>
+  </body>
+</html>

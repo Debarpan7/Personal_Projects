@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retail Banking Value Chain Mapper</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Retail Banking Lines of Business × Value Chain</h1>
+      <p>
+        Example modeled on SBI-style retail operations. Rows are products/services;
+        columns are value-chain L1 stages. Double-click a highlighted cell to view
+        L2 activity flow.
+      </p>
+    </header>
+
+    <section class="controls">
+      <div class="control-title">Filter / Highlight by Unit or Channel</div>
+      <div id="unitFilters" class="chip-wrap"></div>
+      <button id="clearFilter" class="clear-btn">Clear</button>
+    </section>
+
+    <main>
+      <div class="table-wrap">
+        <table id="matrix"></table>
+      </div>
+      <div id="selectionInfo" class="selection-info"></div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

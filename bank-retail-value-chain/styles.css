@@ -252,3 +252,53 @@ th {
     transform: translateY(0);
   }
 }
+
+.l2-item {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  border: 1px solid #35527e;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #142b4d, #0f213d);
+  color: #ebf4ff;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.l2-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+
+.l2-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.l2-meta {
+  font-size: 0.68rem;
+  color: #a5bee4;
+  margin-top: 0.2rem;
+}
+
+.unit-dots {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+}
+
+.unit-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #5b6f94;
+  border: 1px solid #8fa8d4;
+  display: inline-block;
+}
+
+.unit-dot.selected {
+  background: var(--accent);
+  box-shadow: 0 0 0.45rem rgba(82, 255, 216, 0.8);
+  border-color: #bfffee;
+}

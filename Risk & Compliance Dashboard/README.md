@@ -1,31 +1,39 @@
-# Risk & Compliance Dashboard
+# Risk & Compliance Dashboard (Python backend + TypeScript frontend)
 
-Web app demo for a Gold Loan NBFC risk/compliance command center.
+An Apple-style UI demo dashboard for gold-loan risk/compliance with persistent SQLite data.
 
-## What was added
+## Stack
 
-- Dedicated folder: `Risk & Compliance Dashboard`
-- Browser UI app in `public/index.html`
-- Node/Express server in `server.js`
-- SQLite database bootstrap in `db.js`
-- Persistent DB file at runtime: `data/compliance.db`
+- **Backend:** Python + Flask + SQLite
+- **Frontend:** TypeScript (`frontend/app.ts`) with compiled browser JS (`frontend/app.js`)
+- **UI style:** Apple-inspired glassmorphism (clean, light, minimal)
 
-## Database persistence
+## Persistence
 
-The app stores and persists:
+SQLite file: `data/compliance.db`
 
-- AI intelligence feed entries (`ai_feed`)
-- Alerts (`alerts`)
-- Action/event logs (`action_log`)
-
-All writes are saved to `data/compliance.db` and remain between restarts.
+Stored entities:
+- `ai_feed`
+- `alerts`
+- `action_log`
 
 ## Run
 
 ```bash
 cd "Risk & Compliance Dashboard"
-npm install
-npm start
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python backend/app.py
 ```
 
 Open: `http://localhost:4173`
+
+## API
+
+- `GET /api/health`
+- `GET /api/ai-feed`
+- `POST /api/ai-feed`
+- `POST /api/alerts`
+- `GET /api/actions`
+- `POST /api/actions`

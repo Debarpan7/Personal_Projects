@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compliance Orchestrator — GoldShield AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['IBM Plex Sans', 'sans-serif'],
+              mono: ['IBM Plex Mono', 'monospace'],
+            },
+            colors: {
+              bg: '#0A0E1A',
+              surface: '#111827',
+              border: '#1F2937',
+              gold: '#F59E0B',
+              danger: '#EF4444',
+              warning: '#F97316',
+              safe: '#10B981',
+              ai: '#818CF8',
+            },
+            keyframes: {
+              pulseFast: { '0%,100%': { opacity: 0.45 }, '50%': { opacity: 1 } },
+              slideIn: { from: { transform: 'translateX(80px)', opacity: 0 }, to: { transform: 'translateX(0)', opacity: 1 } },
+              fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
+              shimmer: {
+                '0%': { backgroundPosition: '-200% 0' },
+                '100%': { backgroundPosition: '200% 0' },
+              },
+            },
+            animation: {
+              pulseFast: 'pulseFast 1.2s ease-in-out infinite',
+              slideIn: 'slideIn 260ms ease-out',
+              fadeIn: 'fadeIn 150ms ease-out',
+              shimmer: 'shimmer 1.4s linear infinite',
+            },
+          },
+        },
+      };
+    </script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="bg-bg text-slate-100 font-sans">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const {
+        BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+        RadialBarChart, RadialBar,
+      } = Recharts;
+
+      const modules = [
+        { id: 'overview', label: 'Executive Overview', icon: '🏠' },
+        { id: 'ltv', label: 'LTV Monitor', icon: '📊' },
+        { id: 'aml', label: 'AML Surveillance', icon: '🔍' },
+        { id: 'enduse', label: 'End-Use Monitor', icon: '🌾' },
+        { id: 'auction', label: 'Auction Pipeline', icon: '⚖️' },
+        { id: 'kyc', label: 'KYC Status', icon: '🪪' },
+        { id: 'reg', label: 'Regulatory Reporting', icon: '📋' },
+        { id: 'playbooks', label: 'AI Playbooks', icon: '🤖' },
+      ];
+
+      const aiResponses = {
+        "what's our kerala exposure if gold drops 10%?": "If MCX gold falls 10% from current levels (₹71,240 → ₹64,116), an estimated 8,420 Kerala accounts will breach the 75% LTV threshold, representing ₹1,240 Cr in exposure. Top 3 branches at risk: Thrissur Main (₹142 Cr), Ernakulam Central (₹118 Cr), Kozhikode (₹97 Cr). Recommend pre-authorising top-up campaign and alerting regional head.",
+        'draft str for account gl-004821': 'STR Draft — FIU-IND Format: Reporting Entity: GoldShield NBFC Ltd. Subject: Suresh Menon, A/C GL-004821. Nature of Suspicion: Structuring. Transaction Details: Three deposits of ₹3.2L, ₹3.1L, ₹3.2L across consecutive days, total ₹9.5L, below CTR threshold. Grounds: Pattern inconsistent with known customer profile and account history. Filed by: [MLRO Name]. Ready to submit.',
+        'how many auctions are overdue?': '12 accounts are beyond statutory notice timelines. 8 are in Thrissur zone, 4 in Chennai zone. Overdue by an average of 9 days. Auto-generated notice letters are ready for 8 accounts. For the remaining 4, updated borrower contact details are required — flagged for KYC refresh.',
+      };
+
+      const typeText = (text, set) => {
+        let i = 0;
+        const timer = setInterval(() => {
+          i += 1;
+          set(text.slice(0, i));
+          if (i >= text.length) clearInterval(timer);
+        }, 20);
+        return timer;
+      };
+
+      const initialLtvRows = [
+        ['GL-0042819','Priya Nair','Thrissur',48,240000,341952],['GL-0031121','Arun B','Kochi',40,192000,290000],['GL-0052281','Meena R','Madurai',36,160000,242500],
+        ['GL-0061122','Vikram S','Chennai',31,158000,224000],['GL-0019912','Latha Devi','Coimbatore',33,167000,235000],['GL-0091244','Sajeev P','Kozhikode',44,222000,310000],['GL-0097712','Anita M','Trichy',35,174000,244000],['GL-0017740','Ravi K','Salem',28,145000,203000],
+        ['GL-0019443','Ramesh Kumar','Chennai',32,190000,227968],['GL-0098111','Suresh R','Ernakulam',37,210000,272000],['GL-0071232','Neethu P','Thrissur',29,159000,212000],['GL-0044441','Balan T','Palakkad',39,225000,298000],
+        ['GL-0087012','Mohan A','Kottayam',34,205000,250000],['GL-0017709','Divya S','Kanyakumari',30,173000,221000],['GL-0057634','Joseph P','Aluva',42,255000,330000],
+      ];
+
+      function App() {
+        const [activeModule, setActiveModule] = React.useState('overview');
+        const [role, setRole] = React.useState('CCO / CXO');
+        const [toasts, setToasts] = React.useState([]);
+        const [goldPrice, setGoldPrice] = React.useState(71240);
+        const [crashed, setCrashed] = React.useState(false);
+        const [alertModal, setAlertModal] = React.useState(null);
+        const [aiFeed, setAiFeed] = React.useState([
+          '[07:45] Gold price 2.3% decline — portfolio stress alert',
+          '[07:42] 8 STR drafts pending MLRO review — 3 high priority',
+          '[07:30] KYC expiry spike — 340 accounts expiring this Friday',
+          '[07:15] Auction pipeline: Branch Thrissur-3 overdue by 4 days',
+        ]);
+        const [chat, setChat] = React.useState('');
+        const [chatResponse, setChatResponse] = React.useState('');
+        const [brief, setBrief] = React.useState('');
+        const [loading, setLoading] = React.useState(true);
+
+        React.useEffect(() => {
+          const timer = typeText('Gold dropped 2.3% overnight (MCX: ₹71,240). Portfolio stress model estimates 4,218 accounts will breach the 73% LTV advisory threshold within 2 trading sessions if current levels hold. Kerala and Tamil Nadu geographies show highest concentration. Recommend initiating Tier-1 Top-Up Campaign. Draft communications ready.', setBrief);
+          const t2 = setTimeout(()=>setLoading(false),700);
+          return () => { clearInterval(timer); clearTimeout(t2); };
+        }, []);
+
+        React.useEffect(() => {
+          if (!toasts.length) return;
+          const t = setTimeout(() => setToasts((p) => p.slice(1)), 3000);
+          return () => clearTimeout(t);
+        }, [toasts]);
+
+        const addToast = (m) => setToasts((p) => [...p, m]);
+
+        const ltvRows = initialLtvRows.map((r) => {
+          const [id, borrower, branch, weight, loan, market] = r;
+          const effectiveMarket = crashed ? market * 0.95 : market;
+          const ltv = +(loan / effectiveMarket * 100).toFixed(1);
+          let status = '✅ Safe';
+          if (ltv >= 75) status = '🔴 Breach'; else if (ltv >= 73) status = '🟠 Warning'; else if (ltv >= 70) status = '⚠️ Advisory';
+          return { id, borrower, branch, weight, loan, market: Math.round(effectiveMarket), ltv, status };
+        });
+
+        const runCrash = () => {
+          setCrashed(true);
+          let current = 71240;
+          const target = 67678;
+          const timer = setInterval(() => {
+            current -= 220;
+            if (current <= target) {
+              current = target;
+              clearInterval(timer);
+              setAlertModal('🔴 PORTFOLIO BREACH EVENT — Newly breached accounts: 1,448 | Estimated exposure: ₹412 Cr');
+            }
+            setGoldPrice(current);
+          }, 40);
+          setAiFeed((f) => [`[${new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}] Crash simulation triggered — breach accounts 892 → 2,340. Tiered playbook activated.`, ...f]);
+          addToast('✅ 892 → 2,340 accounts now in breach. AI Playbook activated.');
+        };
+
+        const handleChat = () => {
+          const key = chat.trim().toLowerCase();
+          const response = aiResponses[key] || 'I can help with Kerala exposure, STR drafting, auction overdues, and stress scenarios. Try one of the suggested prompts.';
+          setChatResponse('');
+          setTimeout(() => typeText(response, setChatResponse), 350);
+        };
+
+        return (
+          <div className="h-screen flex flex-col bg-bg text-slate-200">
+            <TopBar goldPrice={goldPrice} crashed={crashed} />
+            <div className="flex flex-1 min-h-0">
+              <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} role={role} setRole={setRole} />
+              <main className="flex-1 p-4 overflow-auto animate-fadeIn">
+                {loading ? <Skeleton /> : <ModuleRenderer activeModule={activeModule} role={role} ltvRows={ltvRows} runCrash={runCrash} addToast={addToast} setAlertModal={setAlertModal} brief={brief} crashed={crashed} aiFeed={aiFeed} />}
+              </main>
+              <AIPanel aiFeed={aiFeed} chat={chat} setChat={setChat} handleChat={handleChat} chatResponse={chatResponse} addToast={addToast} />
+            </div>
+
+            {alertModal && <Modal message={alertModal} onClose={() => setAlertModal(null)} />}
+            <div className="fixed top-4 right-[22rem] z-50 space-y-2">
+              {toasts.map((t, i) => <div key={i} className="bg-surface border border-ai px-4 py-2 rounded animate-slideIn text-sm">{t}</div>)}
+            </div>
+          </div>
+        );
+      }
+
+      const card = 'bg-surface border border-border rounded-lg p-3';
+      const SummaryStrip = ({items}) => <div className="grid grid-cols-4 gap-2">{items.map((i,idx)=><div key={idx} className={card+" text-sm font-mono"}>{i}</div>)}</div>;
+
+      function ModuleRenderer({activeModule, role, ltvRows, runCrash, addToast, setAlertModal, brief, crashed, aiFeed}) {
+        if (role === 'Branch Manager') return <BranchManagerView ltvRows={ltvRows} addToast={addToast} />;
+        if (activeModule === 'overview') return <Overview brief={brief} crashed={crashed} runCrash={runCrash} />;
+        if (activeModule === 'ltv') return <LTV ltvRows={ltvRows} runCrash={runCrash} addToast={addToast} crashed={crashed} />;
+        if (activeModule === 'aml') return <AML addToast={addToast} />;
+        if (activeModule === 'enduse') return <EndUse setAlertModal={setAlertModal} />;
+        if (activeModule === 'auction') return <Auction />;
+        if (activeModule === 'kyc') return <KYC addToast={addToast} />;
+        if (activeModule === 'reg') return <Reg />;
+        return <Playbooks addToast={addToast} runCrash={runCrash} />;
+      }
+
+      function TopBar({goldPrice, crashed}) {
+        const [clock, setClock] = React.useState(new Date());
+        React.useEffect(()=>{const i=setInterval(()=>setClock(new Date()),1000);return ()=>clearInterval(i)},[]);
+        return <header className="border-b border-border bg-[#0D1322] px-4 py-3 flex items-center justify-between gap-3">
+          <div className="font-semibold text-gold">⬡ GoldShield AI</div>
+          <div className="flex gap-2 text-xs font-mono">
+            {['Total AUM: ₹4,820 Cr','Active Loans: 2,84,716','Avg LTV: 68.4%','NPA %: 1.82%'].map((p)=><span key={p} className="bg-surface px-2 py-1 rounded border border-border">{p}</span>)}
+          </div>
+          <div className="flex items-center gap-2 text-xs">
+            <span className={`px-2 py-1 rounded border border-danger font-mono ${crashed?'animate-pulseFast':''}`}>MCX Gold: ₹{goldPrice.toLocaleString('en-IN')}/10g <span className="text-danger">▼ {crashed?'5.0':'2.3'}%</span></span>
+            <span className="px-2 py-1 rounded bg-surface border border-border">{clock.toLocaleTimeString('en-GB')}</span>
+            <span className="px-2 py-1 rounded border border-gold">RBI Inspection Readiness: 84%</span>
+            <span className="rounded-full bg-gold text-black px-2 py-1 font-semibold">CCO</span>
+          </div>
+        </header>
+      }
+
+      function Sidebar({activeModule,setActiveModule,role,setRole}) { return <aside className="w-64 border-r border-border p-3 space-y-3 bg-[#0C1220]">
+        <select value={role} onChange={(e)=>setRole(e.target.value)} className="w-full bg-surface border border-border rounded p-2 text-sm">
+          {['CCO / CXO','Regional Risk Manager','Compliance Officer','Branch Manager'].map(r=><option key={r}>{r}</option>)}
+        </select>
+        <div className="space-y-1">
+          {modules.map(m=><button key={m.id} onClick={()=>setActiveModule(m.id)} className={`w-full text-left px-3 py-2 rounded text-sm border ${activeModule===m.id?'border-gold bg-surface':'border-transparent hover:border-border hover:bg-surface'}`}>{m.icon} {m.label}</button>)}
+        </div>
+      </aside>; }
+
+      function Overview({brief,crashed,runCrash}) {
+        const bands = [
+          {band:'50-60',count:54000,fill:'#10B981'},{band:'60-65',count:88000,fill:'#10B981'},{band:'65-70',count:98000,fill:'#10B981'},{band:'70-73',count:31000,fill:'#F59E0B'},{band:'73-75',count:crashed?18470:9824,fill:'#F97316'},{band:'75-80',count:crashed?8240:3892,fill:'#EF4444'},
+        ];
+        const npa = Array.from({length:30}, (_,i)=>({d:i+1,v:110+i*2+(i%4)*3}));
+        return <div className="space-y-3">
+          <div className="grid grid-cols-3 gap-2">{[['Portfolio LTV','68.4%','✅ Safe'],['Accounts > 73% LTV','4,218','⚠️ Warning'],['Accounts > 75% LTV','892','🔴 Breach'],['Open AML Alerts','37','⚠️'],['KYC Expiring (30d)','1,204','⚠️'],['Auction NPA Queue','163','🔴']].map(([m,v,s])=><div key={m} className={card}><div className="text-xs text-slate-400">{m}</div><div className="font-mono text-xl">{v}</div><div className="text-xs">{s}</div></div>)}</div>
+          <div className="grid grid-cols-2 gap-2">
+            <div className={card}><div className="text-sm mb-2">LTV Distribution</div><div className="h-52"><ResponsiveContainer><BarChart data={bands}><CartesianGrid stroke="#1F2937"/><XAxis dataKey="band" stroke="#94a3b8"/><YAxis stroke="#94a3b8"/><Tooltip/><Bar dataKey="count">{bands.map((e,i)=><Cell key={i} fill={e.fill} />)}</Bar></BarChart></ResponsiveContainer></div></div>
+            <div className={card}><div className="text-sm mb-2">30-day NPA Trend</div><div className="h-52"><ResponsiveContainer><LineChart data={npa}><CartesianGrid stroke="#1F2937"/><XAxis dataKey="d" stroke="#94a3b8"/><YAxis stroke="#94a3b8"/><Tooltip/><Line type="monotone" dataKey="v" stroke="#F59E0B" strokeWidth={2}/></LineChart></ResponsiveContainer></div></div>
+          </div>
+          <div className="bg-surface border border-ai rounded-lg p-3"><div className="text-ai text-sm mb-2">⬡ AI BRIEFING — 07:45 AM</div><div className="text-sm leading-relaxed min-h-16">{brief}</div><div className="mt-3 space-x-2"><button onClick={runCrash} className="px-3 py-1 rounded bg-gold text-black text-sm">▶ Run Gold Crash Playbook</button><button className="px-3 py-1 rounded border border-ai text-sm">📩 Brief Regional Heads</button></div></div>
+          <div className={card}><div className="flex justify-between text-sm"><span>RBI Inspection Readiness</span><span>84%</span></div><div className="w-full h-3 bg-slate-800 rounded mt-2"><div className="h-3 bg-gold rounded" style={{width:'84%'}}></div></div><div className="grid grid-cols-5 gap-2 mt-2 text-xs font-mono">{[['LTV',91],['KYC',78],['AML',88],['Auction',82],['End-Use',76]].map(([k,v])=><div key={k}>{k} {v}%</div>)}</div></div>
+        </div>
+      }
+
+      function LTV({ltvRows,runCrash,addToast,crashed}) { return <div className="space-y-3">
+        <div className="flex justify-between items-center bg-surface border border-border rounded p-3"><div className="font-mono">MCX Gold ₹{(crashed?67678:71240).toLocaleString('en-IN')} / 10g <span className="text-danger">▼ {crashed?'5.0':'2.3'}%</span></div><div className="text-xs">Last refreshed: 14 seconds ago</div><button onClick={runCrash} className="bg-danger px-3 py-2 rounded text-sm">🔴 SIMULATE GOLD CRASH</button></div>
+        {crashed && <div className="bg-danger/20 border border-danger rounded p-2 text-sm">892 → 2,340 accounts now in breach. AI Playbook activated.</div>}
+        <div className={card+" overflow-auto"}><table className="w-full text-xs"><thead><tr className="text-slate-400"><th>ID</th><th>Borrower</th><th>Branch</th><th>Weight</th><th>Loan</th><th>Market</th><th>LTV%</th><th>Status</th><th>Action</th></tr></thead><tbody>{ltvRows.map(r=><tr key={r.id} className="border-t border-border hover:bg-slate-800/40"><td>{r.id}</td><td>{r.borrower}</td><td>{r.branch}</td><td>{r.weight}g</td><td>₹{r.loan.toLocaleString('en-IN')}</td><td>₹{r.market.toLocaleString('en-IN')}</td><td className="font-mono">{r.ltv}</td><td>{r.status}</td><td><button className="underline" onClick={()=>addToast('✅ Notification workflow triggered.')}>Notify</button></td></tr>)}</tbody></table></div>
+        <div className="grid grid-cols-3 gap-2">{[['Advisory (70%)','4,218','Send WhatsApp Advisory'],['Warning (73%)','1,847','Escalate to Branch Manager'],['Breach (75%+)','892','Trigger Recovery Workflow']].map(([t,c,a])=><div key={t} className={card}><div>{t}</div><div className="font-mono text-xl">{c}</div><button className="text-xs mt-2 px-2 py-1 border border-gold rounded" onClick={()=>addToast('✅ 4,218 notifications dispatched via WhatsApp/SMS in 3 languages')}>{a}</button></div>)}</div>
+      </div>; }
+
+      function AML({addToast}) { const alerts=[['AML-001','Suresh Menon','Structuring','₹9.5L','Ernakulam','High'],['AML-002','Kavitha Devi','CTR','₹11.5L','Coimbatore','Medium'],['AML-003','Vijay / Ravi / Suresh','Network','₹6.8L','Multi-branch','High'],['AML-004','Anand P','End-Use Violation','₹2.4L','Madurai','High']]; const [sel,setSel]=React.useState(alerts[0]); return <div className="space-y-3">
+        <SummaryStrip items={['Open Alerts: 37','STRs Pending MLRO Review: 8','CTRs Filed This Month: 142','Structuring Flags: 12']} />
+        <div className="grid grid-cols-5 gap-2"><div className={card+" col-span-3"}>{alerts.map(a=><div key={a[0]} onClick={()=>setSel(a)} className={card+" mb-2 cursor-pointer hover:border-ai"}><div className="text-sm">{a[0]} — {a[1]} ({a[2]})</div><div className="text-xs text-slate-400">{a[3]} | {a[4]} | {a[5]}</div></div>)}</div>
+        <div className={card+" col-span-2 border-ai"}><div className="text-ai text-sm">⬡ AI NARRATIVE — MLRO ASSIST</div><div className="text-sm mt-2">Customer Suresh Menon (A/C: GL-004821) made three cash deposits of ₹3.20L, ₹3.10L, and ₹3.20L on consecutive days across three branches. Total ₹9.50L is 5% below CTR threshold. Pattern consistent with structuring under PMLA Section 3. Recommendation: File STR with FIU-IND.</div><div className="mt-2 space-x-2"><button onClick={()=>addToast('✅ STR accepted and submitted to FIU-IND queue')} className="px-2 py-1 bg-safe text-black rounded text-xs">✅ Accept & Submit STR</button><button className="px-2 py-1 border border-border rounded text-xs">✏️ Edit Draft</button></div></div></div>
+        <div className={card}><div className="text-sm mb-2">Network Graph</div><svg width="100%" height="120"><circle cx="90" cy="60" r="18" fill="#818CF8"/><circle cx="240" cy="30" r="14" fill="#F59E0B"/><circle cx="240" cy="90" r="14" fill="#F59E0B"/><circle cx="360" cy="60" r="14" fill="#F59E0B"/><line x1="108" y1="60" x2="226" y2="30" stroke="#94a3b8"/><line x1="108" y1="60" x2="226" y2="90" stroke="#94a3b8"/><line x1="108" y1="60" x2="346" y2="60" stroke="#94a3b8"/></svg></div>
+      </div>; }
+
+      function EndUse({setAlertModal}) { const rows=[['GL-071244','Murugan S.','Crop Cultivation','60% cash withdrawal D+14',87,'Field Visit'],['GL-082391','Latha K.','Business Working Capital','Transfer to crypto platform',94,'Freeze + STR'],['GL-091002','Anand R.','Agricultural','Geo-mismatch: 240km from declared land',76,'Call Verification']]; const [sel]=React.useState(rows[0]); return <div className="space-y-3"><SummaryStrip items={['Agricultural Loans Monitored: 12,840','Flagged Accounts: 218','Field Visits Pending: 67','Geo-Mismatch Alerts: 34']} /><div className="grid grid-cols-3 gap-2"><div className={card+" col-span-2"}><table className="w-full text-xs"><thead><tr><th>Account</th><th>Borrower</th><th>Declared Use</th><th>Flag</th><th>Risk</th><th>Action</th></tr></thead><tbody>{rows.map(r=><tr key={r[0]} className="border-t border-border"><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td><td>{r[4]}</td><td>{r[5]}</td></tr>)}</tbody></table></div><div className={card+" border-ai"}><div className="text-ai">⬡ AI END-USE ANALYSIS</div><p className="text-xs mt-2">Murugan S. declared crop cultivation for ₹85,000. ₹51,000 (60%) withdrawn in cash over 14 days in 8 transactions. No agri input purchases detected. Cropping season alignment inconsistent. Field verification recommended at geo-tag 12.3°N, 79.8°E.</p><button className="mt-2 px-2 py-1 border border-gold rounded text-xs" onClick={()=>setAlertModal('📍 Field Visit Request generated for Murugan S. — verify paddy cultivation and document geo-tag evidence.')}>📍 Generate Field Visit Request</button></div></div><div className={card}><div className="text-sm">Flag Cluster Map (placeholder)</div><svg width="100%" height="120"><rect x="20" y="20" width="300" height="80" rx="8" fill="#1F2937"/><circle cx="140" cy="70" r="6" fill="#F97316"/><circle cx="170" cy="65" r="6" fill="#EF4444"/><circle cx="195" cy="75" r="6" fill="#F59E0B"/></svg></div></div>; }
+
+      function Auction(){return <div className="space-y-3"><SummaryStrip items={['Total NPA Accounts: 1,247','In Auction Pipeline: 163','Notice Dispatched: 98','Auctions Scheduled: 34']} /><div className="grid grid-cols-5 gap-2">{[['NPA Identified',847],['Notice Period',156],['Auction Scheduled',34],['Auction Complete',89],['Proceeds Applied',121]].map(([s,c])=><div key={s} className={card}><div className="text-xs text-slate-400">{s}</div><div className="font-mono text-lg">{c}</div><div className="mt-2 text-xs space-y-1"><div className="p-1 bg-slate-800 rounded">GL-1121 • ₹2.4L • Due tomorrow</div><div className="p-1 bg-slate-800 rounded">GL-1182 • ₹1.9L • Due in 2d</div><div className="p-1 bg-danger/20 border border-danger rounded">GL-1200 • ₹3.1L • OVERDUE</div></div></div>)}</div><div className={card}><div className="text-sm">Compliance Timeline (Gantt-like)</div>{Array.from({length:10},(_,i)=>{const cls=i%4===0?'bg-danger':i%3===0?'bg-warning':'bg-safe';return <div key={i} className="h-4 my-1 bg-slate-800 rounded"><div className={`h-4 rounded ${cls}`} style={{width:`${50+i*4}%`}}></div></div>})}</div><div className="bg-surface border border-ai rounded p-3 text-sm">12 accounts have exceeded statutory auction notice timelines. Recommend immediate escalation to CCO and legal team. Auto-drafted notice letters available for 8 accounts.</div></div>}
+
+      function KYC({addToast}){const days=Array.from({length:60},(_,i)=>({d:i+1,v:Math.floor(Math.random()*28)})); return <div className="space-y-3"><SummaryStrip items={['Total Customers: 2,84,716','KYC Compliant: 2,71,340 (95.3%)','Expiring in 30 days: 1,204','Expired: 4,172']} /><div className="grid grid-cols-3 gap-2"><div className={card+" col-span-2"}><div className="text-sm mb-2">Expiry Heatmap (60 days)</div><div className="grid grid-cols-12 gap-1">{days.map(d=><div key={d.d} className="h-6 rounded" style={{background:`rgba(245,158,11,${0.15+d.v/35})`}} title={`Day ${d.d}: ${d.v}`} />)}</div></div><div className={card}><button onClick={()=>addToast('✅ 1,204 WhatsApp reminders dispatched in Malayalam, Tamil, Telugu, Hindi')} className="w-full bg-gold text-black rounded px-2 py-2 text-sm">🚀 Launch Auto-Refresh Campaign</button><div className="mt-2 text-xs">EDD Escalation Queue: GL-8821, GL-7782, GL-9182, GL-1012, GL-3320</div></div></div><div className={card}><table className="w-full text-xs"><thead><tr><th>Tier</th><th>Count</th><th>Status</th><th>Action</th></tr></thead><tbody>{[['Low Risk','2,41,840','96.2% current','Automated reminder'],['Medium Risk','38,290','93.1% current','Branch outreach'],['High Risk','4,586','88.4% current','EDD + manual review']].map(r=><tr key={r[0]} className="border-t border-border"><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td></tr>)}</tbody></table></div></div>}
+
+      function Reg(){const returns=[['NBS-1','Quarterly','31-Dec-2024','31-Mar-2025','✅ On Track',91],['NBS-2','Quarterly','31-Dec-2024','31-Mar-2025','✅ On Track',88],['CRILC','Monthly','28-Feb-2025','31-Mar-2025','⚠️ 3 Days',72],['FIU-IND STR','As Required','15-Feb-2025','Pending (8)','🔴 Action',64]]; return <div className="space-y-3"><div className="grid grid-cols-3 gap-2"><div className={card}><div className="text-sm">Inspection Readiness</div><div className="text-3xl font-mono text-gold">84%</div></div><div className={card+" col-span-2"}>{[['LTV Compliance',91],['KYC Freshness',78],['AML Filing',88],['Auction Compliance',82],['End-Use Coverage',76]].map(r=><div key={r[0]} className="mb-2 text-xs"><div className="flex justify-between"><span>{r[0]}</span><span>{r[1]}%</span></div><div className="h-2 bg-slate-800 rounded"><div className="h-2 bg-ai rounded" style={{width:r[1]+'%'}}></div></div></div>)}</div></div><div className={card}><table className="w-full text-xs"><thead><tr><th>Return</th><th>Frequency</th><th>Last</th><th>Next</th><th>Status</th><th>Data</th><th>AI</th></tr></thead><tbody>{returns.map(r=><tr key={r[0]} className="border-t border-border"><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td><td>{r[4]}</td><td>{r[5]}%</td><td><button className="underline">⬡ Auto-populate</button></td></tr>)}</tbody></table></div></div>}
+
+      function Playbooks({addToast,runCrash}){const [steps,setSteps]=React.useState([]); const sim=()=>{runCrash(); const arr=['✅ LTV recalculated — 2,340 accounts in breach','✅ Accounts segmented into 3 tiers','✅ 4,218 WhatsApp notifications dispatched','✅ Disbursement pause flag set in LMS','✅ CCO briefing generated','🎯 Playbook executed in 4.2 seconds. Manual equivalent: ~6 hours.']; arr.forEach((s,i)=>setTimeout(()=>setSteps(p=>[...p,s]),500*(i+1)));}; return <div className="grid grid-cols-2 gap-2">{[['Gold Crash Playbook','Trigger: Gold price drop > 3%','Ready',sim],['Auction Sprint Playbook','Trigger: 30+ accounts in overdue auction queue','Active — 12 accounts in queue',()=>addToast('✅ Auction sprint runbook opened')],['KYC Refresh Drive','Trigger: > 1,000 KYC expirations in 30 days','Ready',()=>addToast('✅ KYC refresh playbook launched')],['AML Response Playbook','Trigger: > 5 structuring flags in 7 days','Triggered — 12 flags active',()=>addToast('✅ AML response playbook initiated')]].map(([n,t,s,fn])=><div key={n} className={card}><div className="text-sm font-semibold">{n}</div><div className="text-xs text-slate-400">{t}</div><ol className="text-xs list-decimal ml-4 mt-2"><li>Recalculate/cluster impacted accounts</li><li>Dispatch communications</li><li>Escalate workflow owners</li><li>Generate leadership briefing</li></ol><div className="text-xs mt-2">Status: <span className="text-gold">{s}</span></div><button onClick={fn} className="mt-2 px-3 py-1 border border-gold rounded text-xs">▶ Simulate</button></div>)}<div className={card+" col-span-2"}><div className="text-ai">Execution Log</div>{steps.map((s,i)=><div key={i} className="text-sm mt-1">{s}</div>)}</div></div>}
+
+      function AIPanel({aiFeed, chat, setChat, handleChat, chatResponse, addToast}) {
+        return <aside className="w-80 border-l border-border p-3 bg-[#0C1220] flex flex-col gap-3">
+          <div className="text-ai font-semibold">⬡ AI INTELLIGENCE <span className="inline-block w-2 h-2 bg-ai rounded-full animate-pulseFast"/></div>
+          <div className="bg-surface border border-border rounded p-2 h-56 overflow-auto text-xs space-y-1">{aiFeed.map((f,i)=><div key={i}>{f}</div>)}</div>
+          <div className="bg-surface border border-ai rounded p-2 text-xs min-h-28"><div className="text-ai">⬡ AI RESPONSE</div><div className="mt-1">{chatResponse || 'Ask: “What\'s our Kerala exposure if gold drops 10%?”'}</div>{chatResponse && <div className="mt-2 space-x-1"><button onClick={()=>addToast('✅ Opened related accounts')} className="px-2 py-1 border border-border rounded">View Accounts</button><button onClick={()=>addToast('✅ Sent to MLRO')} className="px-2 py-1 border border-border rounded">Send to MLRO</button><button onClick={()=>addToast('✅ PDF export queued')} className="px-2 py-1 border border-border rounded">Export PDF</button></div>}</div>
+          <input value={chat} onChange={(e)=>setChat(e.target.value)} placeholder="Ask the Compliance AI..." className="bg-surface border border-border rounded p-2 text-sm" />
+          <div className="text-[11px] text-slate-400">Examples: What's my Kerala exposure? · Draft STR for account GL-004821 · Simulate 10% gold drop</div>
+          <button onClick={handleChat} className="bg-ai/20 border border-ai rounded p-2 text-sm">Run AI Query</button>
+        </aside>
+      }
+
+      function Modal({message,onClose}) { return <div className="fixed inset-0 bg-black/70 z-40 grid place-items-center"><div className="bg-surface border border-danger rounded p-4 w-[560px]"><div className="text-danger font-semibold mb-2">Alert</div><div>{message}</div><button onClick={onClose} className="mt-3 px-3 py-1 border border-border rounded">Dismiss</button></div></div>; }
+      function Skeleton(){ return <div className="space-y-2">{Array.from({length:6},(_,i)=><div key={i} className="h-16 rounded bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-[length:200%_100%] animate-shimmer"></div>)}</div>; }
+      function BranchManagerView({ltvRows,addToast}){const top=ltvRows.filter(r=>r.ltv>=75).slice(0,10); return <div className="space-y-3"><div className={card}><div className="text-lg">Branch Manager Task Board</div><div className="text-sm text-slate-400">Top 10 priority customer actions</div></div>{top.map(r=><div key={r.id} className={card+" flex justify-between items-center"}><div><div className="font-semibold">{r.borrower} — {r.id}</div><div className="text-xs">{r.branch} · {r.ltv}% LTV breach — action required</div></div><button className="px-2 py-1 border border-danger rounded text-xs" onClick={()=>addToast(`✅ Recovery call assigned for ${r.id}`)}>Take Action</button></div>)}</div>}
+
+      const Cell = Recharts.Cell;
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

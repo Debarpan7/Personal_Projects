@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Risk & Compliance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0A0E1A] text-slate-100" style="font-family: 'IBM Plex Sans', sans-serif;">
+  <div class="h-screen flex flex-col">
+    <header class="border-b border-slate-700 bg-[#0D1322] px-4 py-3 flex justify-between items-center">
+      <div class="text-amber-400 font-semibold">⬡ GoldShield AI — Risk & Compliance Dashboard</div>
+      <div class="font-mono text-sm" id="goldTicker">MCX Gold: ₹71,240/10g</div>
+    </header>
+
+    <div class="flex flex-1 min-h-0">
+      <aside class="w-64 border-r border-slate-700 p-3 bg-[#0C1220] overflow-auto" id="moduleNav"></aside>
+
+      <main class="flex-1 p-4 overflow-auto" id="mainContent">
+        <div class="grid grid-cols-3 gap-3 mb-3">
+          <div class="bg-slate-900 border border-slate-700 rounded p-3"><div>Total AUM</div><div class="text-2xl font-mono">₹4,820 Cr</div></div>
+          <div class="bg-slate-900 border border-slate-700 rounded p-3"><div>Active Loans</div><div class="text-2xl font-mono">2,84,716</div></div>
+          <div class="bg-slate-900 border border-slate-700 rounded p-3"><div>Inspection Readiness</div><div class="text-2xl font-mono">84%</div></div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-700 rounded p-3 mb-3">
+          <div class="flex justify-between items-center mb-2">
+            <div class="text-indigo-300" id="activeModuleLabel">Executive Overview</div>
+            <button id="simulateCrash" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm">Simulate Gold Crash</button>
+          </div>
+          <div class="grid grid-cols-5 gap-2 text-center font-mono text-xs" id="ltvBands"></div>
+        </div>
+
+        <div class="bg-slate-900 border border-indigo-400 rounded p-3">
+          <div class="text-indigo-300">⬡ AI RESPONSE</div>
+          <div class="min-h-16 mt-2 text-sm" id="aiResponse">Ask the compliance AI for risk projections, STR drafts, and auction overdues.</div>
+          <div class="flex gap-2 mt-2">
+            <input id="aiInput" class="flex-1 bg-slate-950 border border-slate-700 rounded px-2 py-1" placeholder="Ask the Compliance AI..." />
+            <button id="aiSend" class="bg-indigo-500/30 border border-indigo-400 rounded px-3">Send</button>
+          </div>
+        </div>
+      </main>
+
+      <aside class="w-80 border-l border-slate-700 p-3 bg-[#0C1220]">
+        <div class="text-indigo-300 mb-2">⬡ AI INTELLIGENCE FEED (Persisted)</div>
+        <div class="space-y-2 max-h-[80vh] overflow-auto" id="aiFeed"></div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const modules = ['Executive Overview', 'LTV Monitor', 'AML Surveillance', 'End-Use Monitor', 'Auction Pipeline', 'KYC Status', 'Regulatory Reporting', 'AI Playbooks'];
+    const moduleNav = document.getElementById('moduleNav');
+    const activeModuleLabel = document.getElementById('activeModuleLabel');
+    const aiFeed = document.getElementById('aiFeed');
+    const aiResponse = document.getElementById('aiResponse');
+    const aiInput = document.getElementById('aiInput');
+    const goldTicker = document.getElementById('goldTicker');
+    const ltvBands = document.getElementById('ltvBands');
+
+    let goldPrice = 71240;
+
+    function renderModules(active = modules[0]) {
+      moduleNav.innerHTML = '';
+      modules.forEach((m) => {
+        const btn = document.createElement('button');
+        btn.className = `w-full text-left p-2 mb-1 rounded ${active === m ? 'bg-slate-800 border border-amber-500' : 'hover:bg-slate-900'}`;
+        btn.textContent = m;
+        btn.onclick = () => {
+          activeModuleLabel.textContent = m;
+          renderModules(m);
+        };
+        moduleNav.appendChild(btn);
+      });
+    }
+
+    function renderBands() {
+      const bands = [
+        ['<65%', 142000, 'bg-emerald-500'],
+        ['65–70%', 98000, 'bg-emerald-500'],
+        ['70–73%', 31000, 'bg-amber-500'],
+        ['73–75%', 9824, 'bg-orange-500'],
+        ['>75%', goldPrice === 67678 ? 8240 : 3892, 'bg-red-500'],
+      ];
+      ltvBands.innerHTML = '';
+      bands.forEach(([name, value, color]) => {
+        const card = document.createElement('div');
+        card.className = 'bg-slate-800 rounded p-2 border border-slate-700';
+        card.innerHTML = `<div>${name}</div><div class="${color} h-2 rounded my-2"></div><div>${value.toLocaleString('en-IN')}</div>`;
+        ltvBands.appendChild(card);
+      });
+    }
+
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        headers: { 'Content-Type': 'application/json' },
+        ...options,
+      });
+      if (!response.ok) throw new Error('Request failed');
+      return response.json();
+    }
+
+    async function loadFeed() {
+      try {
+        const rows = await api('/api/ai-feed');
+        aiFeed.innerHTML = '';
+        rows.forEach((r) => {
+          const div = document.createElement('div');
+          div.className = 'bg-slate-900 border border-slate-700 rounded p-2 text-sm';
+          div.textContent = r.message;
+          aiFeed.appendChild(div);
+        });
+      } catch (e) {
+        aiFeed.innerHTML = '<div class="text-red-400 text-sm">Unable to load feed. Ensure backend is running.</div>';
+      }
+    }
+
+    async function recordAction(actionType, payload = {}) {
+      await api('/api/actions', { method: 'POST', body: JSON.stringify({ actionType, payload }) });
+    }
+
+    async function simulateCrash() {
+      goldPrice = 67678;
+      goldTicker.textContent = `MCX Gold: ₹${goldPrice.toLocaleString('en-IN')}/10g`;
+      renderBands();
+
+      await api('/api/alerts', {
+        method: 'POST',
+        body: JSON.stringify({ module: 'LTV Monitor', severity: 'critical', message: 'Portfolio breach event during crash simulation. 892 → 2,340 accounts in breach.' })
+      });
+      await api('/api/ai-feed', {
+        method: 'POST',
+        body: JSON.stringify({ message: `[${new Date().toLocaleTimeString()}] Crash simulation triggered — AI Playbook activated.` })
+      });
+      await recordAction('gold_crash_simulated', { from: 71240, to: 67678 });
+      await loadFeed();
+    }
+
+    async function handleAIQuery() {
+      const q = aiInput.value.trim();
+      if (!q) return;
+      let text = 'Try: "What\'s our Kerala exposure if gold drops 10%?"';
+      const key = q.toLowerCase();
+      if (key.includes('kerala') && key.includes('10%')) {
+        text = 'If MCX gold falls 10% (₹71,240 → ₹64,116), 8,420 Kerala accounts may breach 75% LTV with ~₹1,240 Cr exposure. Top branch risk: Thrissur Main, Ernakulam Central, Kozhikode.';
+      } else if (key.includes('str') && key.includes('gl-004821')) {
+        text = 'STR Draft ready for GL-004821 (Suresh Menon): 3 structured deposits totaling ₹9.5L across consecutive days, indicative of structuring pattern below CTR threshold.';
+      }
+
+      aiResponse.textContent = '';
+      let i = 0;
+      const timer = setInterval(() => {
+        i += 1;
+        aiResponse.textContent = text.slice(0, i);
+        if (i >= text.length) clearInterval(timer);
+      }, 18);
+
+      await recordAction('ai_query', { query: q, response: text });
+      await api('/api/ai-feed', { method: 'POST', body: JSON.stringify({ message: `[${new Date().toLocaleTimeString()}] AI Query handled: ${q}` }) });
+      await loadFeed();
+      aiInput.value = '';
+    }
+
+    document.getElementById('simulateCrash').addEventListener('click', simulateCrash);
+    document.getElementById('aiSend').addEventListener('click', handleAIQuery);
+    aiInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') handleAIQuery();
+    });
+
+    renderModules();
+    renderBands();
+    loadFeed();
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Risk & Compliance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=SF+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar glass">
+      <div class="brand"> Risk & Compliance</div>
+      <div class="ticker" id="goldTicker">MCX Gold ₹71,240/10g</div>
+    </header>
+
+    <div class="body-shell">
+      <aside class="sidebar glass" id="moduleNav"></aside>
+
+      <main class="content">
+        <section class="kpis">
+          <article class="card glass"><h4>Total AUM</h4><p>₹4,820 Cr</p></article>
+          <article class="card glass"><h4>Active Loans</h4><p>2,84,716</p></article>
+          <article class="card glass"><h4>Inspection Readiness</h4><p>84%</p></article>
+        </section>
+
+        <section class="card glass">
+          <div class="row between">
+            <h3 id="activeModuleLabel">Executive Overview</h3>
+            <button id="simulateCrash">Simulate Gold Crash</button>
+          </div>
+          <div class="ltv-grid" id="ltvBands"></div>
+        </section>
+
+        <section class="card glass">
+          <h3>AI Response</h3>
+          <p id="aiResponse">Ask about Kerala exposure, STR drafts, or auction risk.</p>
+          <div class="row">
+            <input id="aiInput" placeholder="Ask the Compliance AI..." />
+            <button id="aiSend">Send</button>
+          </div>
+        </section>
+      </main>
+
+      <aside class="right-panel glass">
+        <h3>AI Intelligence Feed</h3>
+        <div id="aiFeed" class="feed"></div>
+      </aside>
+    </div>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
